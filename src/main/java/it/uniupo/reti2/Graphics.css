@@ -21,15 +21,15 @@ td {
 }
 
 #arr {
-    width: 600px;
+    width: 40%;
     overflow: hidden;
     display: inline-block;
-    margin-left: 100px;
+    margin-left: 10%;
 }
 
 #dep {
     float: right;
     overflow: hidden;
-    width: 600px;
-    margin-right: 100px;
+    width: 40%;
+    margin-right: 10%;
 }
