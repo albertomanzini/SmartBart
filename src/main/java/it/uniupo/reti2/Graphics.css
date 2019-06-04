@@ -1,0 +1,35 @@
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+h1 {
+    text-align: center;
+    position: relative;
+    background: rgba(0, 227, 255, 0.31);
+}
+
+h2 {
+    text-align: center;
+}
+
+td {
+    text-align: center;
+    width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#arr {
+    width: 600px;
+    overflow: hidden;
+    display: inline-block;
+    margin-left: 100px;
+}
+
+#dep {
+    float: right;
+    overflow: hidden;
+    width: 600px;
+    margin-right: 100px;
+}
