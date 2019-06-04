@@ -21,7 +21,7 @@ public class Lights {
 
         String getLucebri = "http://localhost:8000/lights/1";
 
-        int brightness = 50;
+        int brightness = 25;
 
         String onLightsNew = "{ \"on\" : true,\"hue\" : 21845, \"bri\" : " + brightness + "}";
         String offLights = "{ \"on\" : false}";
