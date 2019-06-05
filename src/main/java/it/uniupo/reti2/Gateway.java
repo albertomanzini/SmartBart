@@ -15,7 +15,9 @@ public class Gateway {
 
         Map<String, Root> station = bartRest.getForObject(bartURL, Map.class);
 
+        Object root = station.get("root");
         System.out.println(station.get("root"));
+        System.out.println(root);
 
 
     }
