@@ -11,10 +11,14 @@ public class Gateway {
 
         String bartURL = "http://api.bart.gov/api/stn.aspx?cmd=stninfo&orig=colm&json=y&key=QVM6-525T-955T-DWE9";
         RestTemplate bartRest = new RestTemplate();
-        Map<String, Map<String , ?>> station = bartRest.getForObject(bartURL, HashMap.class);
+        //RootStation station = bartRest.getForObject(bartURL, RootStation.class);
 
-        for(String s:station.keySet()) {
-            System.out.println(s);
-        }
+        Map<String, Root> station = bartRest.getForObject(bartURL, Map.class);
+
+        Object root = station.get("root");
+        System.out.println(station.get("root"));
+        System.out.println(root);
+
+
     }
 }
