@@ -6,6 +6,10 @@
     <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 </head>
 
+<div class="box red"></div>
+
+<body>
+
 <h1>London Station</h1>
 
 <div id="arr">
@@ -13,11 +17,15 @@
     <table name="arrivals" border="1" cellpadding="10">
         <!--{{#each tasks}}
         {{#unless completed}}-->
-        <td><b>Station</b></td>
-        <td><b>Time of arrival</b></td>
-        <td><b>Platform</b></td>
-        <td><b>Delay</b></td>
         <tr>
+            <th id="inv"></th>
+            <th>Station</th>
+            <th>Time of arrival</th>
+            <th>Platform</th>
+            <th>Delay</th>
+        </tr>
+        <tr>
+            <td id = "slideLeft">Buy this ticket!</td>
             <td>Manchester</td>
             <td>12:05</td>
             <td>14</td>
@@ -33,15 +41,19 @@
     <table name="departures" border="1" cellpadding="10">
         <!--{{#each tasks}}
         {{#unless completed}}-->
-        <td><b>Station</b></td>
-        <td><b>Time of departure</b></td>
-        <td><b>Platform</b></td>
-        <td><b>Delay</b></td>
+        <tr>
+            <th>Station</th>
+            <th>Time of departure</th>
+            <th>Platform</th>
+            <th>Delay</th>
+            <th id="inv"></th>
+        </tr>
         <tr>
             <td>Glasgow</td>
             <td>12:12</td>
             <td>3</td>
             <td>/</td>
+            <td id = "slideRight">Buy this ticket!</td>
         </tr>
         <!--{{/unless}}
         {{/each}}-->
