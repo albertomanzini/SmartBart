@@ -10,7 +10,7 @@ public class Root {
     @SerializedName(value = "@id")
     private int id;
 
-    private String uri =new String();
+    private transient String uri =new String();
 
     @SerializedName(value = "stations")
     private Map<String, Stations> stations = new HashMap<>();

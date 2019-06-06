@@ -1,35 +1,134 @@
 
 body {
     font-family: 'Ubuntu', sans-serif;
+    font-size: 14px;
+    background-image: url("resources/sfondo stazione.png");
+    background-position: center;
+    background-size: unset;
 }
 
 h1 {
-    text-align: center;
+    text-align: left;
     position: relative;
-    background: rgba(0, 227, 255, 0.31);
+    font-size: 60px;
+    margin-top: -0.5%;
+    margin-left: 0.5%;
+    color: #f3f3f3;
 }
 
 h2 {
     text-align: center;
 }
 
+.box {
+    width: 100.5%;
+    margin-left: -1%;
+    margin-top: -1%;
+    height: 12.5%;
+    position: absolute;
+}
+
+.red {
+    background: rgb(255, 59, 54);
+}
+
+table {
+    color: #333;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-color: transparent;
+}
+
+td, th {
+    border: 1px solid transparent;
+    width: 120px;
+    transition: all 0.5s;
+}
+
+#inv {
+    visibility: hidden;
+}
+
+#tabtitle {
+    background-color: rgb(255, 59, 54);
+    font-size: 150%;
+}
+
+#slideLeft {
+    left: 19.9%;
+    top: 26%;
+    border: 1px transparent;
+    position: sticky;
+    z-index: -1;
+}
+
+a {
+    color: #000000;
+    text-decoration: none
+}
+
+#slideRight {
+    right: 20.1%;
+    top: 26%;
+    border: 1px transparent;
+    position: sticky;
+    z-index: -1;
+}
+
+*[data-href] {
+    cursor: pointer;
+}
+
+td a {
+    display: inline-block;
+    min-height: 100%;
+    width: 100%;
+}
+
+th {
+    background: #555;
+    color: #F1F1F1;
+}
+
 td {
+    background: #FAFAFA;
     text-align: center;
-    width: 150px;
-    overflow: hidden;
-    white-space: nowrap;
+}
+
+tr:nth-child(even) td {
+    background: #F1F1F1;
+}
+
+tr:nth-child(odd) td {
+    background: #FEFEFE;
+}
+
+tr:hover td {
+    background: rgb(255, 59, 54);
+}
+
+tr:hover a {
+    color: #FFF;
+}
+
+tr:hover #slideLeft {
+    left: 2.6%; /* On mouse-over, make the elements appear as they should */
+}
+
+tr:hover #slideRight {
+    right: 2.5%; /* On mouse-over, make the elements appear as they should */
 }
 
 #arr {
-    width: 40%;
+    text-align: center;
     overflow: hidden;
     display: inline-block;
-    margin-left: 10%;
+    margin-left: 2%;
 }
 
 #dep {
+    text-align: center;
     float: right;
     overflow: hidden;
-    width: 40%;
-    margin-right: 10%;
+    margin-right: 2%;
 }

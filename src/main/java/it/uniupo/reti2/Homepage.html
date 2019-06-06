@@ -6,18 +6,43 @@
     <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 </head>
 
+<div class="box red"></div>
+
+<body>
+
 <h1>London Station</h1>
 
 <div id="arr">
-    <h2>Arrivals</h2>
     <table name="arrivals" border="1" cellpadding="10">
         <!--{{#each tasks}}
         {{#unless completed}}-->
-        <td><b>Station</b></td>
-        <td><b>Time of arrival</b></td>
-        <td><b>Platform</b></td>
-        <td><b>Delay</b></td>
         <tr>
+            <th id="inv"></th>
+            <th id="tabtitle"colspan="4">Arrivals</th>
+        </tr>
+        <tr>
+            <th id="inv"></th>
+            <th>Station</th>
+            <th>Time of arrival</th>
+            <th>Platform</th>
+            <th>Delay</th>
+        </tr>
+        <tr data-href="Booking.html">
+            <td id = "slideLeft"><a href="Booking.html">Buy this ticket!</a></td>
+            <td><a href="Booking.html">Manchester</a></td>
+            <td><a href="Booking.html">12:05</a></td>
+            <td><a href="Booking.html">14</a></td>
+            <td><a href="Booking.html">2 minutes</a></td>
+        </tr>
+        <tr>
+            <td id = "slideLeft">Buy this ticket!</td>
+            <td>Manchester</td>
+            <td>12:05</td>
+            <td>14</td>
+            <td>2 minutes</td>
+        </tr>
+        <tr>
+            <td id = "slideLeft">Buy this ticket!</td>
             <td>Manchester</td>
             <td>12:05</td>
             <td>14</td>
@@ -29,19 +54,25 @@
 </div>
 
 <div id="dep">
-    <h2>Departures</h2>
     <table name="departures" border="1" cellpadding="10">
         <!--{{#each tasks}}
         {{#unless completed}}-->
-        <td><b>Station</b></td>
-        <td><b>Time of departure</b></td>
-        <td><b>Platform</b></td>
-        <td><b>Delay</b></td>
+        <tr>
+            <th id="tabtitle"colspan="4">Departures</th>
+        </tr>
+        <tr>
+            <th>Station</th>
+            <th>Time of departure</th>
+            <th>Platform</th>
+            <th>Delay</th>
+            <th id="inv"></th>
+        </tr>
         <tr>
             <td>Glasgow</td>
             <td>12:12</td>
             <td>3</td>
             <td>/</td>
+            <td id = "slideRight">Buy this ticket!</td>
         </tr>
         <!--{{/unless}}
         {{/each}}-->
