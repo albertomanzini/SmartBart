@@ -7,13 +7,23 @@ import java.util.Map;
 
 public class Gateway {
 
-    public static void main(String[] args) {
+    private RootStation station;
+    private RootRoute route;
 
-        String bartURL = "http://api.bart.gov/api/stn.aspx?cmd=stninfo&orig=colm&json=y&key=QVM6-525T-955T-DWE9";
+    public Gateway() {
+
+        String bartRouteURL = "http://api.bart.gov/api/sched.aspx?cmd=routesched&route=1&key=QVM6-525T-955T-DWE9&time=00:00+am&json=y";
+        String bartStnInfoURL = "http://api.bart.gov/api/stn.aspx?cmd=stninfo&orig=colm&json=y&key=QVM6-525T-955T-DWE9";
         RestTemplate bartRest = new RestTemplate();
-        RootStation station = bartRest.getForObject(bartURL, RootStation.class);
+        station = bartRest.getForObject(bartStnInfoURL, RootStation.class);
 
-        //
+        route = bartRest.getForObject(bartRouteURL, RootRoute.class);
 
+        System.out.println(route.getRoot().getRoute().getTrains().get(0));
+
+    }
+
+    public String getNameStn() {
+        return this.station.getRoot().getStations().getStation().getStnName();
     }
 }
