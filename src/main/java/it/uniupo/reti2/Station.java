@@ -7,10 +7,27 @@ import java.util.Map;
 
 public class Station {
 
-    Map<String, String> stnInfo = new HashMap<String, String>();
+    @SerializedName(value = "name")
+    private String name;
 
-    public Map getStnInfo() {
-        return this.stnInfo;
+    private String abbr;
+
+    private String gtfs_latitude;
+
+    public String getStnName() {
+        return this.name;
     }
+
+    public String getAbbr() {
+        return this.abbr;
+    }
+
+    public String getGtfs_latitude() {
+        return this.gtfs_latitude;
+    }
+
+
+
+
 
 }
