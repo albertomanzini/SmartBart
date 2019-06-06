@@ -13,6 +13,7 @@ public class Gateway {
         RestTemplate bartRest = new RestTemplate();
         RootStation station = bartRest.getForObject(bartURL, RootStation.class);
 
+        //
 
     }
 }
