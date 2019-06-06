@@ -2,14 +2,14 @@ package it.uniupo.reti2;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class Stations {
 
-    private Map<String, String> station = new HashMap<>();
+    @SerializedName(value = "station")
+    private Station station;
 
-    public Map getStation() {
+    public Station getStation() {
         return this.station;
     }
 }

@@ -13,9 +13,9 @@ public class Root {
     private transient String uri =new String();
 
     @SerializedName(value = "stations")
-    private Map<String, Stations> stations = new HashMap<>();
+    private Stations stations;
 
-    public Map<String, Stations> getStations() {
+    public Stations getStations() {
         return this.stations;
     }
 
