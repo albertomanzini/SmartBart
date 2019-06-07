@@ -17,4 +17,8 @@ dependencies {
     implementation 'org.springframework:spring-web:5.1.5.RELEASE'
     // Gson
     implementation 'com.google.code.gson:gson:2.8.5'
+    implementation "com.sparkjava:spark-core:2.8.0"
+    implementation "org.xerial:sqlite-jdbc:3.27.2.1"
+    implementation "org.slf4j:slf4j-simple:1.7.26"
+    implementation "com.google.code.gson:gson:2.8.5"
 }
