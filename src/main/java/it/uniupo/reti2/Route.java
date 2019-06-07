@@ -8,9 +8,9 @@ import java.util.List;
 public class Route {
 
     @SerializedName(value = "train")
-    private ArrayList<Train> trains;
+    private ArrayList<Train> train;
 
-    public ArrayList getTrains() {
-        return this.trains;
+    public ArrayList<Train> getTrains() {
+        return this.train;
     }
 }
