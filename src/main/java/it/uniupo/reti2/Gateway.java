@@ -21,7 +21,21 @@ public class Gateway {
 
     }
 
-    public String getNameStn() {
+    public String getStnName() {
         return this.station.getRoot().getStations().getStation().getStnName();
+    }
+
+    public String getStnAddress() {
+        return this.station.getRoot().getStations().getStation().getAddress();
+    }
+
+    public String getStnCity() {
+        return this.station.getRoot().getStations().getStation().getCity();
+    }
+    public String getStnState() {
+        return this.station.getRoot().getStations().getStation().getState();
+    }
+    public int getStnZipcode() {
+        return this.station.getRoot().getStations().getStation().getZipcode();
     }
 }

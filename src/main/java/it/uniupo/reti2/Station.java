@@ -7,23 +7,34 @@ import java.util.Map;
 
 public class Station {
 
-    @SerializedName(value = "name")
     private String name;
-
     private String abbr;
-
     private String gtfs_latitude;
+    private String address;
+    private String city;
+    private String state;
+    private int zipcode;
 
     public String getStnName() {
         return this.name;
     }
-
     public String getAbbr() {
         return this.abbr;
     }
-
     public String getGtfs_latitude() {
         return this.gtfs_latitude;
+    }
+    public String getAddress() {
+        return this.address;
+    }
+    public String getCity() {
+        return this.city;
+    }
+    public String getState() {
+        return this.state;
+    }
+    public int getZipcode() {
+        return this.zipcode;
     }
 
 

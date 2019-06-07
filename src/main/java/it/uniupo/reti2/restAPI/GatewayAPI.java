@@ -19,17 +19,26 @@ public class GatewayAPI {
         String baseURL = "gateway/api/";
         Gateway gatewayDao = new Gateway();
 
-        // get all the tasks
+        // get station info
         get(baseURL + "/stninfo", "application/json", (request, response) -> {
             // set a proper response code and type
             response.type("application/json");
             response.status(200);
 
-            // get all tasks from the DB
-            String nameStn = gatewayDao.getNameStn();
+            String nameStn = gatewayDao.getStnName();
+            String addressStn = gatewayDao.getStnAddress();
+            String cityStn = gatewayDao.getStnCity();
+            String stateStn = gatewayDao.getStnState();
+            int zipcodeStn = gatewayDao.getStnZipcode();
+
             // prepare the JSON-related structure to return
-            Map<String, String> finalJson = new HashMap<>();
+            Map<String, String > finalJson = new HashMap<>();
             finalJson.put("name", nameStn);
+            finalJson.put("address", addressStn);
+            finalJson.put("state", stateStn);
+            finalJson.put("city", cityStn);
+
+            //finalJson.put("zipcode", zipcodeStn);
 
             return finalJson;
         }, gson::toJson);
