@@ -22,7 +22,7 @@
         </tr>
         <tr>
             <th id="inv"></th>
-            <th>Station</th>
+            <th>From</th>
             <th>Time of arrival</th>
             <th>Platform</th>
             <th>Delay</th>
@@ -61,7 +61,7 @@
             <th id="tabtitle" colspan="4">Departures</th>
         </tr>
         <tr>
-            <th>Station</th>
+            <th>To</th>
             <th>Time of departure</th>
             <th>Platform</th>
             <th>Delay</th>
@@ -89,12 +89,23 @@
 </div>
 
 <div id="myModal" class="modal">
-
-    <!-- Modal content -->
     <div class="modal-content">
         <span class="close">&times;</span>
-        <p>Ticket informations:
+        <p align="center"><h2>BUY TICKET</h2>
         </p>
+
+        <div class="voyageInfos"><b>From:</b> London<br>
+        <b>To:</b> Brighton
+        <br><br>
+        <b>Time of departure:</b> 12:05<br>
+            <b>Time of arrival:</b> 13:12<br><br>
+
+            <input type="checkbox" name="vehicle1" value="Bike">I have a bike<br></div>
+
+        <div class="voyageMap" style="width: 100%"><img src="resources/station%20empty.png"><img
+                src="resources/station%20empty.png"><img src="resources/station%20full.png"></div>
+
+        <p align="center"><button>Proceed to payment ></button></p>
     </div>
 
 </div>
