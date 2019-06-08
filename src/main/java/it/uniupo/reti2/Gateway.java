@@ -17,13 +17,25 @@ public class Gateway {
         RestTemplate bartRest = new RestTemplate();
         station = bartRest.getForObject(bartStnInfoURL, RootStation.class);
 
-        route = bartRest.getForObject(bartRouteURL, RootRoute.class);
-
-        System.out.println(route.getRoot().getRoute().getTrains().get(0));
+        route = bartRest. getForObject(bartRouteURL, RootRoute.class);
 
     }
 
-    public String getNameStn() {
+    public String getStnName() {
         return this.station.getRoot().getStations().getStation().getStnName();
+    }
+
+    public String getStnAddress() {
+        return this.station.getRoot().getStations().getStation().getAddress();
+    }
+
+    public String getStnCity() {
+        return this.station.getRoot().getStations().getStation().getCity();
+    }
+    public String getStnState() {
+        return this.station.getRoot().getStations().getStation().getState();
+    }
+    public int getStnZipcode() {
+        return this.station.getRoot().getStations().getStation().getZipcode();
     }
 }

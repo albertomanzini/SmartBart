@@ -5,11 +5,13 @@ import com.google.gson.annotations.SerializedName;
 public class Stop {
 
     @SerializedName(value = "@station")
-    String station;
+    private String station;
     @SerializedName(value = "@load")
-    int load;
+    private int load;
     @SerializedName(value = "@level")
-    String level;
+    private String level;
+    @SerializedName(value = "@origTime")
+    private String originTime;
     @SerializedName(value = "@bikeflag")
-    int bikeflag;
+    private int bikeflag;
 }

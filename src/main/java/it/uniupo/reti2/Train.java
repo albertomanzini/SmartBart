@@ -3,6 +3,7 @@ package it.uniupo.reti2;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Train {
 
@@ -10,13 +11,13 @@ public class Train {
     private String trainId;
 
     @SerializedName(value = "@trainIdx")
-    int trainIdx;
+    private int trainIdx;
 
     @SerializedName(value = "index")
-    int index;
+    private int index;
 
     @SerializedName(value = "stop")
-    ArrayList<Stop> stops;
+    private transient ArrayList<Stop> stops;
 
     public String getTrainId() {
         return this.trainId;
