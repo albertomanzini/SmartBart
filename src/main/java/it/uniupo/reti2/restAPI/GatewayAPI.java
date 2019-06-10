@@ -2,7 +2,10 @@ package it.uniupo.reti2.restAPI;
 
 import com.google.gson.Gson;
 import it.uniupo.reti2.Gateway;
+import it.uniupo.reti2.ItemSchedule;
+import it.uniupo.reti2.StationSchedule;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,14 +34,29 @@ public class GatewayAPI {
             String stateStn = gatewayDao.getStnState();
             int zipcodeStn = gatewayDao.getStnZipcode();
 
+            Integer zipcode = (Integer) zipcodeStn;
+
             // prepare the JSON-related structure to return
             Map<String, String > finalJson = new HashMap<>();
             finalJson.put("name", nameStn);
             finalJson.put("address", addressStn);
             finalJson.put("state", stateStn);
             finalJson.put("city", cityStn);
+            finalJson.put("zipcode", zipcode.toString());
 
-            //finalJson.put("zipcode", zipcodeStn);
+            return finalJson;
+        }, gson::toJson);
+
+        get(baseURL + "/stnschedule", "application/json", (request, response) -> {
+            // set a proper response code and type
+            response.type("application/json");
+            response.status(200);
+
+            // prepare the JSON-related structure to return
+            Map<String, Object> finalJson = new HashMap<>();
+            finalJson.put("date", gatewayDao.getStationSchedule().getDate());
+            finalJson.put("name", gatewayDao.getStationSchedule().getStationSchedule().getName());
+            finalJson.put("station", gatewayDao.getStationSchedule().getStationSchedule().getItemSchedule());
 
             return finalJson;
         }, gson::toJson);
