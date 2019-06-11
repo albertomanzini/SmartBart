@@ -1,10 +1,9 @@
 package it.uniupo.reti2.restAPI;
 
 import com.google.gson.Gson;
-import it.uniupo.reti2.Gateway;
-import it.uniupo.reti2.ItemSchedule;
-import it.uniupo.reti2.StationSchedule;
+import it.uniupo.reti2.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,6 +57,32 @@ public class GatewayAPI {
             finalJson.put("name", gatewayDao.getStationSchedule().getStationSchedule().getName());
             finalJson.put("station", gatewayDao.getStationSchedule().getStationSchedule().getItemSchedule());
 
+            return finalJson;
+        }, gson::toJson);
+
+        get(baseURL + "/route2", "application/json", (request, response) -> {
+            // set a proper response code and type
+            response.type("application/json");
+            response.status(200);
+
+            ArrayList<Train> nameStop = gatewayDao.getRoute().getRoot().getRoute().getTrains();
+
+            String name = nameStop.get(0).getStop().get(0).getStation();
+
+            if(name.equals("MLBR")) {
+                name = "Millbrae";
+            }
+            else if(name.equals("PITT")) {
+                name = "Pittsburg";
+            }
+            else if(name.equals("RICH")) {
+                name = "Richmond";
+            }
+
+
+            // prepare the JSON-related structure to return
+            Map<String, String> finalJson = new HashMap<>();
+            finalJson.put("name", name);
             return finalJson;
         }, gson::toJson);
     }

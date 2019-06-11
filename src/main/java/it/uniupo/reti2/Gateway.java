@@ -14,7 +14,7 @@ public class Gateway {
 
     public Gateway() {
 
-        String bartRouteURL = "http://api.bart.gov/api/sched.aspx?cmd=routesched&route=1&key=QVM6-525T-955T-DWE9&time=00:00+am&json=y";
+        String bartRouteURL = "http://api.bart.gov/api/sched.aspx?cmd=routesched&route=7&key=QVM6-525T-955T-DWE9&time=00:00+am&json=y";
         String bartStnInfoURL = "http://api.bart.gov/api/stn.aspx?cmd=stninfo&orig=colm&json=y&key=QVM6-525T-955T-DWE9";
         String bartStnSchedule = "http://api.bart.gov/api/sched.aspx?cmd=stnsched&orig=colm&date=06/11/2019&key=MW9S-E7SL-26DU-VV8V&l=1&json=y";
         RestTemplate bartRest = new RestTemplate();
@@ -45,7 +45,9 @@ public class Gateway {
     public int getStnZipcode() {
         return this.station.getRoot().getStations().getStation().getZipcode();
     }
-
+    public RootRoute getRoute() {
+        return this.route;
+    }
     public RootSchedule getStationSchedule() {
         return this.schedule.getRootSchedule();
     }

@@ -17,9 +17,13 @@ public class Train {
     private int index;
 
     @SerializedName(value = "stop")
-    private transient ArrayList<Stop> stops;
+    private ArrayList<Stop> stops;
 
     public String getTrainId() {
         return this.trainId;
+    }
+
+    public ArrayList<Stop> getStop() {
+        return this.stops;
     }
 }
