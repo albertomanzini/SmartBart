@@ -20,4 +20,17 @@ public class ItemSchedule {
     private String trainId;
     @SerializedName(value = "@load")
     private String load;
+    private String stationDep;
+
+    public void setStationDep() {
+        if (line.equals("ROUTE 2") || line.equals("ROUTE 8")) {
+            this.stationDep = "Millbrae";
+        }
+        else if(line.equals("ROUTE 1")) {
+            this.stationDep = "Pittsburg";
+        }
+        else if(line.equals("ROUTE 7")) {
+            this.stationDep = "Richmond";
+        }
+    }
 }
