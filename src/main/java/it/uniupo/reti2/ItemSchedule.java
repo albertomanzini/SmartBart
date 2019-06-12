@@ -20,17 +20,32 @@ public class ItemSchedule {
     private String trainId;
     @SerializedName(value = "@load")
     private String load;
-    private String stationDep;
+    private String stationArr;
 
-    public void setStationDep() {
+    public void setStationArr() {
         if (line.equals("ROUTE 2") || line.equals("ROUTE 8")) {
-            this.stationDep = "Millbrae";
+            stationArr = "Millbrae";
         }
         else if(line.equals("ROUTE 1")) {
-            this.stationDep = "Pittsburg";
+            stationArr = "Antioch";
         }
         else if(line.equals("ROUTE 7")) {
-            this.stationDep = "Richmond";
+            stationArr = "Richmond";
+        }
+    }
+
+    public void setStationDep() {
+        if (headStation.equals("ANTC")) {
+            headStation = "Antioch";
+        }
+        else if(headStation.equals("RICH")) {
+            headStation = "Richmond";
+        }
+        else if(headStation.equals("MLBR")) {
+            headStation = "Millbrae";
+        }
+        else if(headStation.equals("SFIA")) {
+            headStation = "San Francisco International Airport";
         }
     }
 }

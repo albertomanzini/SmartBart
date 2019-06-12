@@ -48,24 +48,30 @@ public class GatewayAPI {
             response.type("application/json");
             response.status(200);
 
-            ArrayList<Train> nameStop = gatewayDao.getRoute().getRoot().getRoute().getTrains();
-
-            String name = nameStop.get(0).getStop().get(0).getStation();
+            //ArrayList<Train> nameStop = gatewayDao.getRoute().getRoot().getRoute().getTrains();
 
             Iterator<ItemSchedule> iterator = gatewayDao.getStationSchedule().getStationSchedule().getItemSchedule().iterator();
-            int i=0;
+
+            //Iterator<InfoRoute> iter = gatewayDao.getRouteInfo().getRoutes().getRoot().getRoutes().getRoute().iterator();
 
             while (iterator.hasNext()) {
-                iterator.next().setStationDep();
+                iterator.next().setStationArr();
             }
 
+            Iterator<ItemSchedule> iter = gatewayDao.getStationSchedule().getStationSchedule().getItemSchedule().iterator();
+
+
+            while (iter.hasNext()) {
+                iter.next().setStationDep();
+            }
 
             // prepare the JSON-related structure to return
             Map<String, Object> finalJson = new HashMap<>();
             finalJson.put("date", gatewayDao.getStationSchedule().getDate());
             finalJson.put("name", gatewayDao.getStationSchedule().getStationSchedule().getName());
             finalJson.put("station", gatewayDao.getStationSchedule().getStationSchedule().getItemSchedule());
-            finalJson.put("nameDep", name);
+            //finalJson.put("nameDep",  name);
+           // finalJson.put("nameArr", )
 
             return finalJson;
         }, gson::toJson);

@@ -1,5 +1,6 @@
 package it.uniupo.reti2;
 
+import it.uniupo.reti2.restAPI.RouteInfo;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ public class Gateway {
     private RootStation station;
     private RootRoute route;
     private ColmSchedule schedule;
+    private RouteInfo routeInfo = new RouteInfo();
 
     public Gateway() {
 
@@ -50,5 +52,9 @@ public class Gateway {
     }
     public RootSchedule getStationSchedule() {
         return this.schedule.getRootSchedule();
+    }
+
+    public RouteInfo getRouteInfo() {
+        return routeInfo;
     }
 }
