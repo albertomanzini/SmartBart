@@ -48,11 +48,11 @@ public class GatewayAPI {
             response.type("application/json");
             response.status(200);
 
-            //ArrayList<Train> nameStop = gatewayDao.getRoute().getRoot().getRoute().getTrains();
+            Map<String, Object> finalJson = new HashMap<>();
+
+           // System.out.println(gatewayDao.getRealTimeInfo().getRoot().getStation().get(0).getEtd().get(0).getEstimate());
 
             Iterator<ItemSchedule> iterator = gatewayDao.getStationSchedule().getStationSchedule().getItemSchedule().iterator();
-
-            //Iterator<InfoRoute> iter = gatewayDao.getRouteInfo().getRoutes().getRoot().getRoutes().getRoute().iterator();
 
             while (iterator.hasNext()) {
                 iterator.next().setStationArr();
@@ -66,13 +66,33 @@ public class GatewayAPI {
             }
 
             // prepare the JSON-related structure to return
-            Map<String, Object> finalJson = new HashMap<>();
             finalJson.put("date", gatewayDao.getStationSchedule().getDate());
             finalJson.put("name", gatewayDao.getStationSchedule().getStationSchedule().getName());
             finalJson.put("station", gatewayDao.getStationSchedule().getStationSchedule().getItemSchedule());
             //finalJson.put("nameDep",  name);
            // finalJson.put("nameArr", )
 
+            return finalJson;
+        }, gson::toJson);
+
+        get(baseURL + "/stnrealtime", "application/json", (request, response) -> {
+            // set a proper response code and type
+            response.type("application/json");
+            response.status(200);
+
+            Map<String, Object> finalJson = new HashMap<>();
+
+            try {
+                Iterator<Estimate> iterEtd = gatewayDao.getRealTimeInfo().getRoot().getStation().get(0).getEtd().get(0).getEstimate().iterator();
+
+                while (iterEtd.hasNext()) {
+                    iterEtd.next().getDelay();
+                }
+            }catch (NullPointerException e) {
+                finalJson.put("ERROR", "Non ci sono treni in transito");
+            }
+
+        finalJson.put("departures", gatewayDao.getRealTimeInfo().getRoot().getStation().get(0).getEtd());
             return finalJson;
         }, gson::toJson);
     }

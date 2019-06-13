@@ -21,6 +21,7 @@ public class ItemSchedule {
     @SerializedName(value = "@load")
     private String load;
     private String stationArr;
+    private String delay;
 
     public void setStationArr() {
         if (line.equals("ROUTE 2") || line.equals("ROUTE 8")) {
@@ -47,5 +48,9 @@ public class ItemSchedule {
         else if(headStation.equals("SFIA")) {
             headStation = "San Francisco International Airport";
         }
+    }
+
+    public void setDelay(String delay) {
+        this.delay=delay;
     }
 }

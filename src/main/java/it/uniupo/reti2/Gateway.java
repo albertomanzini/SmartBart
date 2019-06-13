@@ -13,18 +13,23 @@ public class Gateway {
     private RootRoute route;
     private ColmSchedule schedule;
     private RouteInfo routeInfo = new RouteInfo();
+    private RootRealTimeInfo realTimeInfo;
 
     public Gateway() {
 
         String bartRouteURL = "http://api.bart.gov/api/sched.aspx?cmd=routesched&route=7&key=QVM6-525T-955T-DWE9&time=00:00+am&json=y";
         String bartStnInfoURL = "http://api.bart.gov/api/stn.aspx?cmd=stninfo&orig=colm&json=y&key=QVM6-525T-955T-DWE9";
         String bartStnSchedule = "http://api.bart.gov/api/sched.aspx?cmd=stnsched&orig=colm&date=06/11/2019&key=MW9S-E7SL-26DU-VV8V&l=1&json=y";
+        String bartRealTimeInfo = "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=antc&key=MW9S-E7SL-26DU-VV8V&json=y";
+
         RestTemplate bartRest = new RestTemplate();
         station = bartRest.getForObject(bartStnInfoURL, RootStation.class);
 
         route = bartRest.getForObject(bartRouteURL, RootRoute.class);
 
         schedule = bartRest.getForObject(bartStnSchedule, ColmSchedule.class);
+
+        realTimeInfo = bartRest.getForObject(bartRealTimeInfo, RootRealTimeInfo.class);
 
 
 
@@ -56,5 +61,9 @@ public class Gateway {
 
     public RouteInfo getRouteInfo() {
         return routeInfo;
+    }
+
+    public RootRealTimeInfo getRealTimeInfo() {
+        return realTimeInfo;
     }
 }
