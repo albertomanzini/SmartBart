@@ -89,7 +89,7 @@ public class GatewayAPI {
                     iterEtd.next().setDestination(iterator.next().getDestination());
                 }
             }catch (NullPointerException e) {
-                finalJson.put("ERROR", "Non ci sono treni in transito");
+                finalJson.put("error", "Non ci sono treni in transito");
             }
 
         finalJson.put("departures", gatewayDao.getRealTimeInfo().getRoot().getStation().get(0).getEtd());
