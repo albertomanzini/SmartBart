@@ -84,9 +84,9 @@ public class GatewayAPI {
 
             try {
                 Iterator<Estimate> iterEtd = gatewayDao.getRealTimeInfo().getRoot().getStation().get(0).getEtd().get(0).getEstimate().iterator();
-
+                Iterator<Etd> iterator = gatewayDao.getRealTimeInfo().getRoot().getStation().get(0).getEtd().iterator();
                 while (iterEtd.hasNext()) {
-                    iterEtd.next().getDelay();
+                    iterEtd.next().setDestination(iterator.next().getDestination());
                 }
             }catch (NullPointerException e) {
                 finalJson.put("ERROR", "Non ci sono treni in transito");

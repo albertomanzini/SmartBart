@@ -19,4 +19,9 @@ public class Etd {
     public ArrayList<Estimate> getEstimate() {
         return estimate;
     }
+
+    public void setDestination(String destination) {
+        estimate.get(0).setDestination(destination);
+
+    }
 }
