@@ -48,7 +48,7 @@ public class Estimate {
         return delay;
     }
 
-    public void setDestination(String minutes) {
+    public void setDestination(String destination) {
         this.destination = destination;
     }
 }
