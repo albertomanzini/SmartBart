@@ -22,6 +22,8 @@ public class Estimate {
     @SerializedName(value = "delay")
     private String delay;
 
+    public int id;
+
     private String destination;
 
     public String getLength() {
@@ -46,10 +48,6 @@ public class Estimate {
 
     public String getDelay() {
         return delay;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
     }
 }
 

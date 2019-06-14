@@ -2,6 +2,7 @@ package it.uniupo.reti2.restAPI;
 
 import com.google.gson.Gson;
 import it.uniupo.reti2.*;
+import jdk.nashorn.internal.objects.IteratorResult;
 
 import java.lang.reflect.Array;
 import java.util.*;
@@ -82,17 +83,18 @@ public class GatewayAPI {
 
             Map<String, Object> finalJson = new HashMap<>();
 
+            Gateway gatewayTemp = new Gateway();
+
             try {
-                Iterator<Estimate> iterEtd = gatewayDao.getRealTimeInfo().getRoot().getStation().get(0).getEtd().get(0).getEstimate().iterator();
-                Iterator<Etd> iterator = gatewayDao.getRealTimeInfo().getRoot().getStation().get(0).getEtd().iterator();
-                while (iterEtd.hasNext()) {
-                    iterEtd.next().setDestination(iterator.next().getDestination());
-                }
+               Iterator<Etd> iter = gatewayTemp.getRealTimeInfo().getRoot().getStation().get(0).getEtd().iterator();
+               while (iter.hasNext()) {
+                   iter.next().setId();
+               }
             }catch (Exception e) {
                 System.out.println("ERROR Non ci sono treni in transito");
             }
 
-        finalJson.put("departures", gatewayDao.getRealTimeInfo().getRoot().getStation().get(0).getEtd());
+        finalJson.put("departures", gatewayTemp.getRealTimeInfo().getRoot().getStation().get(0).getEtd());
             return finalJson;
         }, gson::toJson);
     }
