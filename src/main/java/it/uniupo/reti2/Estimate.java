@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Estimate {
 
+    public int id;
     @SerializedName(value = "minutes")
     private String minutes;
 
@@ -22,7 +23,7 @@ public class Estimate {
     @SerializedName(value = "delay")
     private String delay;
 
-    public int id;
+    public int trainId;
 
     private String destination;
 

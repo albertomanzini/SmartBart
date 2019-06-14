@@ -6,20 +6,21 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Etd {
-
+    private int counter=0;
     @SerializedName(value = "destination")
     private String destination;
 
     @SerializedName(value = "estimate")
-    private ArrayList<Estimate> estimate;
+    public static ArrayList<Estimate> estimate;
 
-    public void setId() {
+    public static int setId(int counter) {
         Iterator<Estimate> iter = estimate.iterator();
-        int counter=0;
+
 
         while (iter.hasNext()) {
             iter.next().id = counter++;
         }
+        return counter;
     }
 
     public String getDestination() {

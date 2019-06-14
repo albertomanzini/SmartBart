@@ -2,9 +2,7 @@ package it.uniupo.reti2.restAPI;
 
 import com.google.gson.Gson;
 import it.uniupo.reti2.*;
-import jdk.nashorn.internal.objects.IteratorResult;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 import static spark.Spark.get;
@@ -86,9 +84,11 @@ public class GatewayAPI {
             Gateway gatewayTemp = new Gateway();
 
             try {
+
                Iterator<Etd> iter = gatewayTemp.getRealTimeInfo().getRoot().getStation().get(0).getEtd().iterator();
+
                while (iter.hasNext()) {
-                   iter.next().setId();
+                   iter.next();
                }
             }catch (Exception e) {
                 System.out.println("ERROR Non ci sono treni in transito");
