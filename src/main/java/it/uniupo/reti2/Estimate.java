@@ -53,17 +53,50 @@ public class Estimate {
     }
 
     public void setTrainId() {
-        if(minutes.equals("Leaving")) {
-            this.trainId="0"+platform;
-        }
-        else {
-            this.trainId=minutes+platform;
+        if (minutes.equals("Leaving")) {
+            this.trainId = platform + "0";
+        } else {
+            this.trainId = minutes + platform;
         }
     }
 
-    public void setTimeDep(String timeDep) {
+    public void setTimeDep(int min, int hour) {
 
-        this.timeDep=timeDep;
+        try {
+            int intMin = Integer.parseInt(minutes);
+        } catch (NumberFormatException e) {
+            minutes = "0";
+        }
+
+        int intMin = Integer.parseInt(minutes);
+
+        min = intMin + min;
+
+        if (min >= 60) {
+            int temp = min - 60;
+            Integer hourTempo = hour + 1;
+            min = temp;
+            String timeDep;
+
+            if (min < 10) {
+                timeDep = hour + ":0" + min;
+            } else {
+                timeDep = hour + ":" + min;
+            }
+        } else {
+            if (min < 10) {
+                timeDep = hour + ":0" + min;
+            } else {
+                timeDep = hour + ":" + min;
+            }
+        }
+
+        this.timeDep = timeDep;
+    }
+
+    public void setTrainIdTime(int min, int hour) {
+        setTrainId();
+        setTimeDep(min, hour);
     }
 }
 

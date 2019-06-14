@@ -10,7 +10,6 @@ import static spark.Spark.halt;
 
 public class GatewayAPI {
 
-
     public static void main(String[] args) {
         // init
         Gson gson = new Gson();
@@ -85,36 +84,17 @@ public class GatewayAPI {
 
             String[] timeArray = gatewayTemp.getRealTimeInfo().getRoot().getTime().split(":");
 
-            int time= Integer.parseInt(timeArray[1]);
-
-            String timeDep="";
-
-            if(time>=60) {
-                int temp=time-60;
-                Integer timeHour=Integer.parseInt(timeArray[0])+1+temp;
-                time=0;
-                timeDep=timeHour.toString()+":"+time+"0";
-
-            }else {
-                timeDep=timeArray[0]+":"+time+"0";
-            }
-
-
-
-
-            try {
+            int timeMin= Integer.parseInt(timeArray[1]);
+            int timeHour= Integer.parseInt(timeArray[0]);
 
                Iterator<Etd> iter = gatewayTemp.getRealTimeInfo().getRoot().getStation().get(0).getEtd().iterator();
                while (iter.hasNext()) {
                    Iterator<Estimate> iterator = iter.next().getEstimate().iterator();
                    while (iterator.hasNext()) {
-                       iterator.next().setTrainId();
-                       iterator.next().setTimeDep(timeDep);
+                       iterator.next().setTrainIdTime(timeMin, timeHour);
                    }
                }
-            }catch (Exception e) {
-                System.out.println("ERROR Non ci sono treni in transito");
-            }
+
 
             finalJson.put("departures", gatewayTemp.getRealTimeInfo().getRoot().getStation().get(0).getEtd());
             finalJson.put("time", gatewayTemp.getRealTimeInfo().getRoot().getTime());
