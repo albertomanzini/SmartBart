@@ -86,9 +86,11 @@ public class GatewayAPI {
             try {
 
                Iterator<Etd> iter = gatewayTemp.getRealTimeInfo().getRoot().getStation().get(0).getEtd().iterator();
-
                while (iter.hasNext()) {
-                   iter.next().setId();
+                   Iterator<Estimate> iterator = iter.next().getEstimate().iterator();
+                   while (iterator.hasNext()) {
+                       iterator.next().setTrainId();
+                   }
                }
             }catch (Exception e) {
                 System.out.println("ERROR Non ci sono treni in transito");

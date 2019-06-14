@@ -22,7 +22,7 @@ public class Estimate {
     @SerializedName(value = "delay")
     private String delay;
 
-    public int trainId;
+    private String trainId;
 
     private String destination;
 
@@ -48,6 +48,10 @@ public class Estimate {
 
     public String getDelay() {
         return delay;
+    }
+
+    public void setTrainId() {
+        this.trainId=minutes+platform;
     }
 }
 

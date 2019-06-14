@@ -6,24 +6,23 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Etd {
-    private int counter=0;
+
     @SerializedName(value = "destination")
     private String destination;
 
     @SerializedName(value = "estimate")
-    public static ArrayList<Estimate> estimate;
+    private ArrayList<Estimate> estimate;
 
-    public void setId() {
+    /*public void setId() {
 
+private int counter=0;
         Iterator<Estimate> iter = estimate.iterator();
-
-        int counter=0;
 
         while (iter.hasNext()) {
             iter.next().trainId = counter++;
         }
         return;
-    }
+    }*/
 
     public String getDestination() {
         return destination;
