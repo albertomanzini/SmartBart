@@ -26,6 +26,8 @@ public class Estimate {
 
     private String destination;
 
+    private String timeDep;
+
     public String getLength() {
         return length;
     }
@@ -51,7 +53,17 @@ public class Estimate {
     }
 
     public void setTrainId() {
-        this.trainId=minutes+platform;
+        if(minutes.equals("Leaving")) {
+            this.trainId="0"+platform;
+        }
+        else {
+            this.trainId=minutes+platform;
+        }
+    }
+
+    public void setTimeDep(String timeDep) {
+
+        this.timeDep=timeDep;
     }
 }
 

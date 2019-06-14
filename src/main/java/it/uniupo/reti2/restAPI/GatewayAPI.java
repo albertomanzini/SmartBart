@@ -83,6 +83,25 @@ public class GatewayAPI {
 
             Gateway gatewayTemp = new Gateway();
 
+            String[] timeArray = gatewayTemp.getRealTimeInfo().getRoot().getTime().split(":");
+
+            int time= Integer.parseInt(timeArray[1]);
+
+            String timeDep="";
+
+            if(time>=60) {
+                int temp=time-60;
+                Integer timeHour=Integer.parseInt(timeArray[0])+1+temp;
+                time=0;
+                timeDep=timeHour.toString()+":"+time+"0";
+
+            }else {
+                timeDep=timeArray[0]+":"+time+"0";
+            }
+
+
+
+
             try {
 
                Iterator<Etd> iter = gatewayTemp.getRealTimeInfo().getRoot().getStation().get(0).getEtd().iterator();
@@ -90,13 +109,16 @@ public class GatewayAPI {
                    Iterator<Estimate> iterator = iter.next().getEstimate().iterator();
                    while (iterator.hasNext()) {
                        iterator.next().setTrainId();
+                       iterator.next().setTimeDep(timeDep);
                    }
                }
             }catch (Exception e) {
                 System.out.println("ERROR Non ci sono treni in transito");
             }
 
-        finalJson.put("departures", gatewayTemp.getRealTimeInfo().getRoot().getStation().get(0).getEtd());
+            finalJson.put("departures", gatewayTemp.getRealTimeInfo().getRoot().getStation().get(0).getEtd());
+            finalJson.put("time", gatewayTemp.getRealTimeInfo().getRoot().getTime());
+
             return finalJson;
         }, gson::toJson);
     }
