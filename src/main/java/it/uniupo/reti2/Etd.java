@@ -13,14 +13,16 @@ public class Etd {
     @SerializedName(value = "estimate")
     public static ArrayList<Estimate> estimate;
 
-    public static int setId(int counter) {
+    public void setId() {
+
         Iterator<Estimate> iter = estimate.iterator();
 
+        int counter=0;
 
         while (iter.hasNext()) {
-            iter.next().id = counter++;
+            iter.next().trainId = counter++;
         }
-        return counter;
+        return;
     }
 
     public String getDestination() {

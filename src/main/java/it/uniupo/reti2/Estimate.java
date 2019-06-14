@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class Estimate {
 
-    public int id;
     @SerializedName(value = "minutes")
     private String minutes;
 
