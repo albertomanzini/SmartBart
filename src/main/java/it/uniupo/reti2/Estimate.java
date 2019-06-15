@@ -62,6 +62,9 @@ public class Estimate {
 
     public void setTimeDep(int min, int hour) {
 
+        int minTemp;
+
+        //se è "leaving"
         try {
             int intMin = Integer.parseInt(minutes);
         } catch (NumberFormatException e) {
@@ -75,23 +78,20 @@ public class Estimate {
         if (min >= 60) {
             int temp = min - 60;
             Integer hourTempo = hour + 1;
-            min = temp;
-            String timeDep;
+            minTemp = temp;
 
-            if (min < 10) {
-                timeDep = hour + ":0" + min;
+            if (minTemp < 10) {
+                this.timeDep = hourTempo + ":0" + minTemp;
             } else {
-                timeDep = hour + ":" + min;
+                this.timeDep = hourTempo + ":" + minTemp;
             }
         } else {
             if (min < 10) {
-                timeDep = hour + ":0" + min;
+                this.timeDep = hour + ":0" + min;
             } else {
-                timeDep = hour + ":" + min;
+                this.timeDep = hour + ":" + min;
             }
         }
-
-        this.timeDep = timeDep;
     }
 
     public void setDelay() {
@@ -110,6 +110,10 @@ public class Estimate {
         setTrainId();
         setTimeDep(min, hour);
         setDelay();
+    }
+
+    public String getTimeDep() {
+        return timeDep;
     }
 }
 

@@ -87,13 +87,18 @@ public class GatewayAPI {
             int timeMin= Integer.parseInt(timeArray[1]);
             int timeHour= Integer.parseInt(timeArray[0]);
 
-               Iterator<Etd> iter = gatewayTemp.getRealTimeInfo().getRoot().getStation().get(0).getEtd().iterator();
-               while (iter.hasNext()) {
-                   Iterator<Estimate> iterator = iter.next().getEstimate().iterator();
-                   while (iterator.hasNext()) {
-                       iterator.next().setTrainIdTime(timeMin, timeHour);
-                   }
-               }
+            //sortTrains(gatewayTemp.getRealTimeInfo().getRoot().getStation());
+
+            Iterator<Etd> iter = gatewayTemp.getRealTimeInfo().getRoot().getStation().get(0).getEtd().iterator();
+            while (iter.hasNext()) {
+                Iterator<Estimate> iterator = iter.next().getEstimate().iterator();
+                while (iterator.hasNext()) {
+                    iterator.next().setTrainIdTime(timeMin, timeHour);
+                }
+            }
+
+           //sortTrains(gatewayTemp.getRealTimeInfo().getRoot().getStation().get(0).getEtd());
+
 
 
             finalJson.put("departures", gatewayTemp.getRealTimeInfo().getRoot().getStation().get(0).getEtd());
@@ -102,6 +107,27 @@ public class GatewayAPI {
             return finalJson;
         }, gson::toJson);
     }
+    /*
+    private static void sortTrains(ArrayList<Etd> station) {
+
+        ArrayList<Estimate> trains=null;
+
+        String firstHour=null;
+
+        Iterator<Etd> iterator = station.iterator();
+        while (iterator.hasNext()) {
+            Iterator<Estimate> iter = iterator.next().getEstimate().iterator();
+            while (iter.hasNext()) {
+                if(firstHour.isEmpty()) {
+                    firstHour = iter.next().getTimeDep();
+                }
+                else {
+                    trains.add(iter.next());
+                }
+
+            }
+        }
+    }*/
 }
 
 
