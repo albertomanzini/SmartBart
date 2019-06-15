@@ -94,9 +94,22 @@ public class Estimate {
         this.timeDep = timeDep;
     }
 
+    public void setDelay() {
+        int intDelay = Integer.parseInt(delay);
+
+        int temp = intDelay/60;
+
+        if (intDelay%60 > 29) {
+            temp++;
+        }
+
+        delay = String.valueOf(temp);
+    }
+
     public void setTrainIdTime(int min, int hour) {
         setTrainId();
         setTimeDep(min, hour);
+        setDelay();
     }
 }
 
