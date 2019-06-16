@@ -31,8 +31,6 @@ public class Gateway {
 
         realTimeInfo = bartRest.getForObject(bartRealTimeInfo, RootRealTimeInfo.class);
 
-
-
     }
 
     public String getStnName() {

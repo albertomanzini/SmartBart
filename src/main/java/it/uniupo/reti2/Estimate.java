@@ -76,14 +76,16 @@ public class Estimate {
         min = intMin + min;
 
         if (min >= 60) {
-            int temp = min - 60;
-            Integer hourTempo = hour + 1;
-            minTemp = temp;
 
-            if (minTemp < 10) {
-                this.timeDep = hourTempo + ":0" + minTemp;
+            do {
+                min = min - 60;
+                hour++;
+            } while (min >= 60);
+
+            if (min < 10) {
+                this.timeDep = hour + ":0" + min;
             } else {
-                this.timeDep = hourTempo + ":" + minTemp;
+                this.timeDep = hour + ":" + min;
             }
         } else {
             if (min < 10) {
