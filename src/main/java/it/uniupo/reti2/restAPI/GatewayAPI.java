@@ -80,23 +80,23 @@ public class GatewayAPI {
 
             Map<String, Object> finalJson = new HashMap<>();
 
-            Gateway gatewayTemp = new Gateway();
+            Gateway gatewayReal = new Gateway();
 
-            String[] timeArray = gatewayTemp.getRealTimeInfo().getRoot().getTime().split(":");
+            String[] timeArray = gatewayReal.getRealTimeInfo().getRoot().getTime().split(":");
 
             int timeMin= Integer.parseInt(timeArray[1]);
             int timeHour= Integer.parseInt(timeArray[0]);
 
             //sortTrains(gatewayTemp.getRealTimeInfo().getRoot().getStation());
             try {
-                Iterator<Etd> iter = gatewayTemp.getRealTimeInfo().getRoot().getStation().get(0).getEtd().iterator();
+                Iterator<Etd> iter = gatewayReal.getRealTimeInfo().getRoot().getStation().get(0).getEtd().iterator();
                 while (iter.hasNext()) {
                     Iterator<Estimate> iterator = iter.next().getEstimate().iterator();
                     while (iterator.hasNext()) {
                         iterator.next().setTrainIdTime(timeMin, timeHour);
                     }
                 }
-                finalJson.put("departures", gatewayTemp.getRealTimeInfo().getRoot().getStation().get(0).getEtd());
+                finalJson.put("departures", gatewayReal.getRealTimeInfo().getRoot().getStation().get(0).getEtd());
             }catch(Exception e) {
                 System.out.println("Non ci sono treni");
                 finalJson.put("error", "Non ci sono treni");
@@ -107,7 +107,8 @@ public class GatewayAPI {
 
 
 
-            finalJson.put("time", gatewayTemp.getRealTimeInfo().getRoot().getTime());
+            finalJson.put("time", gatewayReal.getRealTimeInfo().getRoot().getTime());
+            finalJson.put("station", gatewayReal.getStationSchedule().getStationSchedule().getItemSchedule());
 
             return finalJson;
         }, gson::toJson);
