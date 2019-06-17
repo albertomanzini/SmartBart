@@ -5,8 +5,7 @@ import it.uniupo.reti2.*;
 
 import java.util.*;
 
-import static spark.Spark.get;
-import static spark.Spark.halt;
+import static spark.Spark.*;
 
 public class GatewayAPI {
 
@@ -86,9 +85,27 @@ public class GatewayAPI {
 
             int timeMin= Integer.parseInt(timeArray[1]);
             int timeHour= Integer.parseInt(timeArray[0]);
-
-            //sortTrains(gatewayTemp.getRealTimeInfo().getRoot().getStation());
             try {
+                Iterator<Etd> iter1 = gatewayReal.getRealTimeInfo().getRoot().getStation().get(0).getEtd().iterator();
+                while (iter1.hasNext()) {
+                    iter1.next().setDest();
+                }
+            }catch (Exception e) {
+                System.out.println("There are no trains currently");
+            }
+
+            try {
+                Iterator<ItemSchedule> iter0 = gatewayReal.getStationSchedule().getStationSchedule().getItemSchedule().iterator();
+                while (iter0.hasNext()) {
+                    iter0.next().setTrainId();
+                }
+            }catch (Exception e) {
+                System.out.println("There are no trains currently");
+                finalJson.put("error", "There are no trains currently");
+            }
+
+            try {
+                //sortTrains(gatewayTemp.getRealTimeInfo().getRoot().getStation());
                 Iterator<Etd> iter = gatewayReal.getRealTimeInfo().getRoot().getStation().get(0).getEtd().iterator();
                 while (iter.hasNext()) {
                     Iterator<Estimate> iterator = iter.next().getEstimate().iterator();
@@ -97,11 +114,11 @@ public class GatewayAPI {
                     }
                 }
                 finalJson.put("departures", gatewayReal.getRealTimeInfo().getRoot().getStation().get(0).getEtd());
-            }catch(Exception e) {
+            }catch (Exception e) {
                 System.out.println("There are no trains currently");
                 finalJson.put("error", "There are no trains currently");
-
             }
+
 
            //sortTrains(gatewayTemp.getRealTimeInfo().getRoot().getStation().get(0).getEtd());
 
@@ -112,6 +129,27 @@ public class GatewayAPI {
 
             return finalJson;
         }, gson::toJson);
+
+        post("/buy", (req, res) -> {
+            Map addRequest = gson.fromJson(req.body(), Map.class);
+
+            if(addRequest!=null && addRequest.containsKey("CF") && addRequest.containsKey("bike")) {
+                String cf = String.valueOf(addRequest.get("CF"));
+                int bike = ((Double)addRequest.get("bike")).intValue();
+                String trainId = String.valueOf(addRequest.get("traindId"));
+
+
+
+
+
+                res.status(201);
+            }
+            else {
+                halt(403);
+            }
+
+            return "";
+        });
     }
     /*
     private static void sortTrains(ArrayList<Etd> station) {

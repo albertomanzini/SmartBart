@@ -16,8 +16,9 @@ public class ItemSchedule {
     private String trainIdx;
     @SerializedName(value = "@bikeflag")
     private String bikeFlag;
-    @SerializedName(value = "@trainId")
+
     private String trainId;
+
     @SerializedName(value = "@load")
     private String load;
     private String stationArr;
@@ -48,6 +49,12 @@ public class ItemSchedule {
         else if(headStation.equals("SFIA")) {
             headStation = "San Francisco International Airport";
         }
+    }
+
+    public void setTrainId() {
+        String[] temp=originTime.split(":");
+        String[] temp1=temp[1].split(" ");
+        this.trainId=this.headStation+temp[0]+temp1[0];
     }
 
     public void setDelay(String delay) {

@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class Estimate {
 
+
+
     @SerializedName(value = "minutes")
     private String minutes;
 
@@ -25,6 +27,8 @@ public class Estimate {
     private String trainId;
 
     private String destination;
+
+    private String abbr;
 
     private String timeDep;
 
@@ -53,11 +57,17 @@ public class Estimate {
     }
 
     public void setTrainId() {
-        if (minutes.equals("Leaving")) {
-            this.trainId = platform + "0";
-        } else {
-            this.trainId = minutes + platform;
+        String[] temp=timeDep.split(":");
+        Integer min=Integer.parseInt(temp[1]);
+        min=min-1;
+        temp[1]=min.toString();
+        if(min>10) {
+            this.trainId = this.abbr + temp[0] + temp[1];
         }
+        else {
+            this.trainId = this.abbr + temp[0] +"0"+temp[1];
+        }
+
     }
 
     public void setTimeDep(int min, int hour) {
@@ -108,9 +118,14 @@ public class Estimate {
         delay = String.valueOf(temp);
     }
 
+    public void setAbbr(String abbr) {
+        this.abbr=abbr;
+    }
+
     public void setTrainIdTime(int min, int hour) {
-        setTrainId();
+
         setTimeDep(min, hour);
+        setTrainId();
         setDelay();
     }
 
