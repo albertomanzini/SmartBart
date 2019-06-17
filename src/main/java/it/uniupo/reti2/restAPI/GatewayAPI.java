@@ -130,15 +130,17 @@ public class GatewayAPI {
             return finalJson;
         }, gson::toJson);
 
-        post("/buy", (req, res) -> {
+        post(baseURL+"/buy", (req, res) -> {
             Map addRequest = gson.fromJson(req.body(), Map.class);
 
             if(addRequest!=null && addRequest.containsKey("CF") && addRequest.containsKey("bike")) {
                 String cf = String.valueOf(addRequest.get("CF"));
-                int bike = ((Double)addRequest.get("bike")).intValue();
+                int bike = Integer.parseInt((String) addRequest.get("bike"));
                 String trainId = String.valueOf(addRequest.get("traindId"));
 
+                Passenger seats = new Passenger(cf, bike, trainId);
 
+                
 
 
 

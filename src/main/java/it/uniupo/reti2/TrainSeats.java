@@ -2,11 +2,11 @@ package it.uniupo.reti2;
 
 public class TrainSeats {
 
-    int seats;
-    int bookedSeats;
-    int bikeNumber;
+    private int seats;
+    private int bookedSeats;
+    private int bikeNumber;
 
-    int bikeCounter=0;
+    private int bikeCounter=0;
 
     public TrainSeats(int lenght) {
         this.seats=lenght*40;
