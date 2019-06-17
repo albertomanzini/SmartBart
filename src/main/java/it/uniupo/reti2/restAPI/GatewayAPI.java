@@ -98,8 +98,8 @@ public class GatewayAPI {
                 }
                 finalJson.put("departures", gatewayReal.getRealTimeInfo().getRoot().getStation().get(0).getEtd());
             }catch(Exception e) {
-                System.out.println("Non ci sono treni");
-                finalJson.put("error", "Non ci sono treni");
+                System.out.println("There are no trains currently");
+                finalJson.put("error", "There are no trains currently");
 
             }
 
