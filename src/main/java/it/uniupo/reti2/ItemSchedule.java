@@ -54,7 +54,15 @@ public class ItemSchedule {
     public void setTrainId() {
         String[] temp=originTime.split(":");
         String[] temp1=temp[1].split(" ");
-        this.trainId=this.headStation+temp[0]+temp1[0];
+        if(headStation.equals("ANTC")) {
+            this.trainId="1111"+temp[0]+temp1[0];
+        } else if (headStation.equals("MLBR")) {
+            this.trainId="2222"+temp[0]+temp1[0];
+        } else if (headStation.equals("RICH")) {
+            this.trainId="3333"+temp[0]+temp1[0];
+        } else {
+            this.trainId = "4444" + temp[0] + temp1[0];
+        }
     }
 
     public void setDelay(String delay) {

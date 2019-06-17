@@ -62,10 +62,26 @@ public class Estimate {
         min=min-1;
         temp[1]=min.toString();
         if(min>10) {
-            this.trainId = this.abbr + temp[0] + temp[1];
+            if(abbr.equals("ANTC")) {
+                this.trainId="1111"+temp[0]+temp[1];
+            } else if (abbr.equals("MLBR")) {
+                this.trainId="2222"+temp[0]+temp[1];
+            } else if (abbr.equals("RICH")) {
+                this.trainId="3333"+temp[0]+temp[1];
+            } else {
+                this.trainId = "4444" + temp[0] + temp[1];
+            }
         }
         else {
-            this.trainId = this.abbr + temp[0] +"0"+temp[1];
+            if(abbr.equals("ANTC")) {
+                this.trainId="1111"+temp[0]+"0"+temp[1];
+            } else if (abbr.equals("MLBR")) {
+                this.trainId="2222"+temp[0]+"0"+temp[1];
+            } else if (abbr.equals("RICH")) {
+                this.trainId="3333"+temp[0]+"0"+temp[1];
+            } else {
+                this.trainId = "4444" + temp[0] +"0"+ temp[1];
+            }
         }
 
     }
