@@ -8,6 +8,7 @@ public class RootRoutes {
     private transient String uri;
     @SerializedName(value = "date")
     private String date;
+
     @SerializedName(value = "sched_num")
     private int scheNum;
 
@@ -21,4 +22,6 @@ public class RootRoutes {
     public int getScheNum() {
         return this.scheNum;
     }
+
+
 }

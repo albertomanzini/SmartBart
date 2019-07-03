@@ -69,4 +69,8 @@ public class ItemSchedule {
     public void setDelay(String delay) {
         this.delay=delay;
     }
+
+    public String getStationDep() {
+        return this.headStation;
+    }
 }

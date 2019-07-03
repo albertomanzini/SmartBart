@@ -17,6 +17,7 @@ public class GatewayAPI {
 
         // get station info
         get(baseURL + "/stninfo", "application/json", (request, response) -> {
+
             // set a proper response code and type
             response.type("application/json");
             response.status(200);
@@ -49,6 +50,8 @@ public class GatewayAPI {
 
            // System.out.println(gatewayDao.getRealTimeInfo().getRoot().getStation().get(0).getEtd().get(0).getEstimate());
 
+            gatewayDao.getStationSchedule().setNewDate();
+
             Iterator<ItemSchedule> iterator = gatewayDao.getStationSchedule().getStationSchedule().getItemSchedule().iterator();
 
             while (iterator.hasNext()) {
@@ -64,6 +67,7 @@ public class GatewayAPI {
 
             // prepare the JSON-related structure to return
             finalJson.put("date", gatewayDao.getStationSchedule().getDate());
+            finalJson.put("newdate", gatewayDao.getStationSchedule().getNewDate());
             finalJson.put("name", gatewayDao.getStationSchedule().getStationSchedule().getName());
             finalJson.put("station", gatewayDao.getStationSchedule().getStationSchedule().getItemSchedule());
             //finalJson.put("nameDep",  name);
@@ -153,7 +157,58 @@ public class GatewayAPI {
 
             return "";
         });
+
+        get(baseURL + "/change/:date/:station", "application/json", (request, response) -> {
+
+            Gateway gatewayBooking=new Gateway();
+            // get the id from the URL
+            String date = request.params(":date");
+            String station = request.params(":station");
+
+            Map<String,Object> finalJson = new HashMap<>();
+
+
+            Iterator<ItemSchedule> iterator = gatewayBooking.getStationSchedule().getStationSchedule().getItemSchedule().iterator();
+
+            while (iterator.hasNext()) {
+                iterator.next().setStationArr();
+            }
+
+            Iterator<ItemSchedule> iter = gatewayBooking.getStationSchedule().getStationSchedule().getItemSchedule().iterator();
+
+
+            while (iter.hasNext()) {
+                iter.next().setStationDep();
+            }
+
+            Iterator<ItemSchedule> iterator2 = gatewayBooking.getStationSchedule().getStationSchedule().getItemSchedule().iterator();
+
+            while(iterator2.hasNext()) {
+                if(iterator2.next().getStationDep().equals(station)) {
+                }
+                else {
+                    iterator2.remove();
+                }
+            }
+
+            // prepare the JSON-related structure to return
+            finalJson.put("date", gatewayBooking.getStationSchedule().getDate());
+            finalJson.put("name", gatewayBooking.getStationSchedule().getStationSchedule().getName());
+            finalJson.put("station", gatewayBooking.getStationSchedule().getStationSchedule().getItemSchedule());
+
+
+
+            //if(task==null)
+            //   halt(404);
+
+            // prepare the JSON-related structure to return
+            // and the suitable HTTP response code and type
+            response.type("application/json");
+
+            return finalJson;
+        }, gson::toJson);
     }
+}
     /*
     private static void sortTrains(ArrayList<Etd> station) {
 
@@ -174,28 +229,8 @@ public class GatewayAPI {
 
             }
         }
-    }*/
+    }*
 }
-
-
-        /*get a single task
-        get(baseURL + "/tasks/:id", "application/json", (request, response) -> {
-            // get the id from the URL
-            ShutdownHooks.Task task = gatewayDao.getTask(Integer.valueOf(request.params(":id")));
-
-            // no task? 404!
-            if(task==null)
-                halt(404);
-
-            // prepare the JSON-related structure to return
-            // and the suitable HTTP response code and type
-            Map<String,?> finalJson = new HashMap<>();
-            finalJson.put("task", task);
-            response.status(200);
-            response.type("application/json");
-
-            return finalJson;
-        }, gson::toJson);
 
         // add a new task
         post(baseURL + "/changedate", (request, response) -> {
@@ -203,10 +238,10 @@ public class GatewayAPI {
             Map addRequest = gson.fromJson(request.body(), Map.class);
 
             // check whether everything is in place
-            if(addRequest!=null && addRequest.containsKey("description") && addRequest.containsKey("urgent")) {
-                String description = String.valueOf(addRequest.get("description"));
+            if(addRequest!=null && addRequest.containsKey("date") && addRequest.containsKey("station")) {
+                String date = String.valueOf(addRequest.get("date"));
                 // gson convert JSON num in double, but we need an int
-                int urgent = ((Double) addRequest.get("urgent")).intValue();
+                //int urgent = ((Double) addRequest.get("urgent")).intValue();
 
                 // add the task into the DB
                 gatewayDao.addTask(new Task(description, urgent));
