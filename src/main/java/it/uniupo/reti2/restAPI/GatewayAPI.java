@@ -198,7 +198,7 @@ public class GatewayAPI {
         }, gson::toJson);
 
         // add a new task
-        post(baseURL + "/tasks", (request, response) -> {
+        post(baseURL + "/changedate", (request, response) -> {
             // get the body of the HTTP request
             Map addRequest = gson.fromJson(request.body(), Map.class);
 
