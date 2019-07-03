@@ -32,6 +32,8 @@ public class Estimate {
 
     private String timeDep;
 
+    private String timeArr;
+
     public String getLength() {
         return length;
     }
@@ -58,37 +60,150 @@ public class Estimate {
 
     public void setTrainId() {
         String[] temp=timeDep.split(":");
+        Integer hour=Integer.parseInt(temp[0]);
         Integer min=Integer.parseInt(temp[1]);
-        min=min-1;
-        temp[1]=min.toString();
         if(min>10) {
             if(abbr.equals("ANTC")) {
+                if(hour+1>12) {
+                    hour=1;
+                }
+                else {
+                    hour=hour+1;
+                }
+
+                if(min+37>60) {
+                    hour++;
+                    min=min+37-60;
+                }
+                else {
+                    min=min+37;
+                }
+                min=min-1;
+                temp[1]=min.toString();
                 this.trainId="1111"+temp[0]+temp[1];
+                this.timeArr=hour+":"+min;;
             } else if (abbr.equals("MLBR")) {
+                if(hour+1>12) {
+                    hour=1;
+                }
+
+                if(min+11>60) {
+                    hour++;
+                    min=min+11-60;
+                }
+                else {
+                    min=min+11;
+                }
+                min=min-1;
+                temp[1]=min.toString();
                 this.trainId="2222"+temp[0]+temp[1];
+                this.timeArr=hour+":"+min;;
             } else if (abbr.equals("RICH")) {
+                if(hour+1>12) {
+                    hour=1;
+                }
+
+                if(min+57>60) {
+                    hour++;
+                    min=min+57-60;
+                }
+                else {
+                    min=min+57;
+                }
+                min=min-1;
+                temp[1]=min.toString();
                 this.trainId="3333"+temp[0]+temp[1];
+                this.timeArr=hour+":"+min;;
             } else {
+                if(hour+1>12) {
+                    hour=1;
+                }
+
+                if(min+10>60) {
+                    hour++;
+                    min=min+10-60;
+                }
+                else {
+                    min=min+10;
+                }
+                temp[1]=min.toString();
                 this.trainId = "4444" + temp[0] + temp[1];
+                this.timeArr=hour+":"+min;;
             }
         }
         else {
             if(abbr.equals("ANTC")) {
+                if(hour+1>12) {
+                    hour=1;
+                }
+                else {
+                    hour=hour+1;
+                }
+
+                if(min+37>60) {
+                    hour++;
+                    min=min+37-60;
+                }
+                else {
+                    min=min+37;
+                }
+                min=min-1;
+                temp[1]=min.toString();
                 this.trainId="1111"+temp[0]+"0"+temp[1];
+                this.timeArr=hour+":"+min;;
             } else if (abbr.equals("MLBR")) {
+                if(hour+1>12) {
+                    hour=1;
+                }
+
+                if(min+11>60) {
+                    hour++;
+                    min=min+11-60;
+                }
+                else {
+                    min=min+11;
+                }
+                min=min-1;
+                temp[1]=min.toString();
                 this.trainId="2222"+temp[0]+"0"+temp[1];
+                this.timeArr=hour+":"+min;;
             } else if (abbr.equals("RICH")) {
+                if(hour+1>12) {
+                    hour=1;
+                }
+
+                if(min+57>60) {
+                    hour++;
+                    min=min+57-60;
+                }
+                else {
+                    min=min+57;
+                }
+                min=min-1;
+                temp[1]=min.toString();
+                this.timeArr=hour+":"+min;;
                 this.trainId="3333"+temp[0]+"0"+temp[1];
             } else {
+                if(hour+1>12) {
+                    hour=1;
+                }
+
+                if(min+10>60) {
+                    hour++;
+                    min=min+10-60;
+                }
+                else {
+                    min=min+10;
+                }
+                temp[1]=min.toString();
                 this.trainId = "4444" + temp[0] +"0"+ temp[1];
+                this.timeArr=hour+":"+min;;
             }
         }
 
     }
 
     public void setTimeDep(int min, int hour) {
-
-        int minTemp;
 
         //se è "leaving"
         try {

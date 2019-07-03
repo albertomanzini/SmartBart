@@ -81,10 +81,6 @@ public class GatewayAPI {
 
             Gateway gatewayReal = new Gateway();
 
-            String[] timeArray = gatewayReal.getRealTimeInfo().getRoot().getTime().split(":");
-
-            int timeMin= Integer.parseInt(timeArray[1]);
-            int timeHour= Integer.parseInt(timeArray[0]);
             try {
                 Iterator<Etd> iter1 = gatewayReal.getRealTimeInfo().getRoot().getStation().get(0).getEtd().iterator();
                 while (iter1.hasNext()) {
@@ -103,6 +99,11 @@ public class GatewayAPI {
                 System.out.println("There are no trains currently");
                 finalJson.put("error", "There are no trains currently");
             }
+
+            String[] timeArray = gatewayReal.getRealTimeInfo().getRoot().getTime().split(":");
+
+            int timeMin= Integer.parseInt(timeArray[1]);
+            int timeHour= Integer.parseInt(timeArray[0]);
 
             try {
                 //sortTrains(gatewayTemp.getRealTimeInfo().getRoot().getStation());
