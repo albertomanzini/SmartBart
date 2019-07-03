@@ -17,6 +17,7 @@ public class ItemSchedule {
     @SerializedName(value = "@bikeflag")
     private String bikeFlag;
 
+    @SerializedName(value = "@trainId")
     private String trainId;
 
     @SerializedName(value = "@load")
