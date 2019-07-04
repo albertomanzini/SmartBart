@@ -160,10 +160,13 @@ public class GatewayAPI {
 
         get(baseURL + "/change/:date/:station", "application/json", (request, response) -> {
 
-            Gateway gatewayBooking=new Gateway();
             // get the id from the URL
             String date = request.params(":date");
             String station = request.params(":station");
+
+            String newDate[] = date.split("-");
+
+            Gateway gatewayBooking=new Gateway(newDate[0]+"/"+newDate[1]+"/"+newDate[2]);
 
             Map<String,Object> finalJson = new HashMap<>();
 
