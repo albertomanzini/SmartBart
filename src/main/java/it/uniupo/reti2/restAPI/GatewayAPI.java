@@ -127,8 +127,9 @@ public class GatewayAPI {
 
            //sortTrains(gatewayTemp.getRealTimeInfo().getRoot().getStation().get(0).getEtd());
 
+            gatewayDao.getStationSchedule().setNewDate();
 
-
+            finalJson.put("newdate", gatewayDao.getStationSchedule().getNewDate());
             finalJson.put("time", gatewayReal.getRealTimeInfo().getRoot().getTime());
             finalJson.put("station", gatewayReal.getStationSchedule().getStationSchedule().getItemSchedule());
 
