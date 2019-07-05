@@ -165,9 +165,11 @@ public class GatewayAPI {
             String date = request.params(":date");
             String station = request.params(":station");
 
+
+
             String newDate[] = date.split("-");
 
-            Gateway gatewayBooking=new Gateway(newDate[0]+"/"+newDate[1]+"/"+newDate[2]);
+            Gateway gatewayBooking=new Gateway(newDate[1]+"/"+newDate[2]+"/"+newDate[0]);
 
             Map<String,Object> finalJson = new HashMap<>();
 
@@ -188,7 +190,7 @@ public class GatewayAPI {
             Iterator<ItemSchedule> iterator2 = gatewayBooking.getStationSchedule().getStationSchedule().getItemSchedule().iterator();
 
             while(iterator2.hasNext()) {
-                if(iterator2.next().getStationDep().equals(station)) {
+                if(iterator2.next().getAbbr().equals(station)) {
                 }
                 else {
                     iterator2.remove();

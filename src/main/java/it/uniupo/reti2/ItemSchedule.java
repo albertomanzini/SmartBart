@@ -25,6 +25,8 @@ public class ItemSchedule {
     private String stationArr;
     private String delay;
 
+    private String abbr=null;
+
     public void setStationArr() {
         if (line.equals("ROUTE 2") || line.equals("ROUTE 8")) {
             stationArr = "Millbrae";
@@ -40,15 +42,24 @@ public class ItemSchedule {
     public void setStationDep() {
         if (headStation.equals("ANTC")) {
             headStation = "Antioch";
+            this.abbr="antc";
         }
         else if(headStation.equals("RICH")) {
             headStation = "Richmond";
+            this.abbr="rich";
         }
         else if(headStation.equals("MLBR")) {
             headStation = "Millbrae";
+            this.abbr="mlbr";
         }
         else if(headStation.equals("SFIA")) {
             headStation = "San Francisco International Airport";
+            this.abbr="sfia";
+        }
+        else if(headStation.equals("PITT")) {
+            headStation = "Pittsburg/Bay Point";
+            this.abbr= "pitt";
+
         }
     }
 
@@ -72,5 +83,13 @@ public class ItemSchedule {
 
     public String getStationDep() {
         return this.headStation;
+    }
+
+    public String getHeadStation() {
+        return this.headStation;
+    }
+
+    public String getAbbr() {
+        return this.abbr;
     }
 }
