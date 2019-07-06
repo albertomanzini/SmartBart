@@ -4,8 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class Estimate {
 
-
-
     @SerializedName(value = "minutes")
     private String minutes;
 
@@ -59,151 +57,149 @@ public class Estimate {
     }
 
     public void setTrainId() {
-        String[] temp=timeDep.split(":");
-        Integer hour=Integer.parseInt(temp[0]);
-        Integer min=Integer.parseInt(temp[1]);
-        if(min>10) {
-            if(abbr.equals("ANTC")) {
-                if(hour+1>12) {
-                    hour=1;
-                }
-                else {
-                    hour=hour+1;
+        String[] temp = timeDep.split(":");
+        Integer hour = Integer.parseInt(temp[0]);
+        Integer min = Integer.parseInt(temp[1]);
+        if (min > 10) {
+            if (abbr.equals("ANTC")) {
+                if (hour + 1 > 12) {
+                    hour = 1;
+                } else {
+                    hour = hour + 1;
                 }
 
-                if(min+37>60) {
+                if (min + 37 > 60) {
                     hour++;
-                    min=min+37-60;
+                    min = min + 37 - 60;
+                } else {
+                    min = min + 37;
                 }
-                else {
-                    min=min+37;
-                }
-                min=min-1;
-                temp[1]=min.toString();
-                this.trainId="1111"+temp[0]+temp[1];
-                this.timeArr=hour+":"+min;;
+                min = min - 1;
+                temp[1] = min.toString();
+                this.trainId = "1111" + temp[0] + temp[1];
+                this.timeArr = hour + ":" + min;
+                ;
             } else if (abbr.equals("MLBR")) {
-                if(hour+1>12) {
-                    hour=1;
+                if (hour + 1 > 12) {
+                    hour = 1;
                 }
 
-                if(min+11>60) {
+                if (min + 11 > 60) {
                     hour++;
-                    min=min+11-60;
+                    min = min + 11 - 60;
+                } else {
+                    min = min + 11;
                 }
-                else {
-                    min=min+11;
-                }
-                min=min-1;
-                temp[1]=min.toString();
-                this.trainId="2222"+temp[0]+temp[1];
-                this.timeArr=hour+":"+min;;
+                min = min - 1;
+                temp[1] = min.toString();
+                this.trainId = "2222" + temp[0] + temp[1];
+                this.timeArr = hour + ":" + min;
+                ;
             } else if (abbr.equals("RICH")) {
-                if(hour+1>12) {
-                    hour=1;
+                if (hour + 1 > 12) {
+                    hour = 1;
                 }
 
-                if(min+57>60) {
+                if (min + 57 > 60) {
                     hour++;
-                    min=min+57-60;
+                    min = min + 57 - 60;
+                } else {
+                    min = min + 57;
                 }
-                else {
-                    min=min+57;
-                }
-                min=min-1;
-                temp[1]=min.toString();
-                this.trainId="3333"+temp[0]+temp[1];
-                this.timeArr=hour+":"+min;;
+                min = min - 1;
+                temp[1] = min.toString();
+                this.trainId = "3333" + temp[0] + temp[1];
+                this.timeArr = hour + ":" + min;
+                ;
             } else {
-                if(hour+1>12) {
-                    hour=1;
+                if (hour + 1 > 12) {
+                    hour = 1;
                 }
 
-                if(min+10>60) {
+                if (min + 10 > 60) {
                     hour++;
-                    min=min+10-60;
+                    min = min + 10 - 60;
+                } else {
+                    min = min + 10;
                 }
-                else {
-                    min=min+10;
-                }
-                temp[1]=min.toString();
+                temp[1] = min.toString();
                 this.trainId = "4444" + temp[0] + temp[1];
-                this.timeArr=hour+":"+min;;
+                this.timeArr = hour + ":" + min;
+                ;
             }
-        }
-        else {
-            if(abbr.equals("ANTC")) {
-                if(hour+1>12) {
-                    hour=1;
-                }
-                else {
-                    hour=hour+1;
+        } else {
+            if (abbr.equals("ANTC")) {
+                if (hour + 1 > 12) {
+                    hour = 1;
+                } else {
+                    hour = hour + 1;
                 }
 
-                if(min+37>60) {
+                if (min + 37 > 60) {
                     hour++;
-                    min=min+37-60;
+                    min = min + 37 - 60;
+                } else {
+                    min = min + 37;
                 }
-                else {
-                    min=min+37;
-                }
-                min=min-1;
-                temp[1]=min.toString();
-                this.trainId="1111"+temp[0]+"0"+temp[1];
-                this.timeArr=hour+":"+min;;
+                min = min - 1;
+                temp[1] = min.toString();
+                this.trainId = "1111" + temp[0] + "0" + temp[1];
+                this.timeArr = hour + ":" + min;
+                ;
             } else if (abbr.equals("MLBR")) {
-                if(hour+1>12) {
-                    hour=1;
+                if (hour + 1 > 12) {
+                    hour = 1;
                 }
 
-                if(min+11>60) {
+                if (min + 11 > 60) {
                     hour++;
-                    min=min+11-60;
+                    min = min + 11 - 60;
+                } else {
+                    min = min + 11;
                 }
-                else {
-                    min=min+11;
-                }
-                min=min-1;
-                temp[1]=min.toString();
-                this.trainId="2222"+temp[0]+"0"+temp[1];
-                this.timeArr=hour+":"+min;;
+                min = min - 1;
+                temp[1] = min.toString();
+                this.trainId = "2222" + temp[0] + "0" + temp[1];
+                this.timeArr = hour + ":" + min;
+                ;
             } else if (abbr.equals("RICH")) {
-                if(hour+1>12) {
-                    hour=1;
+                if (hour + 1 > 12) {
+                    hour = 1;
                 }
 
-                if(min+57>60) {
+                if (min + 57 > 60) {
                     hour++;
-                    min=min+57-60;
+                    min = min + 57 - 60;
+                } else {
+                    min = min + 57;
                 }
-                else {
-                    min=min+57;
-                }
-                min=min-1;
-                temp[1]=min.toString();
-                this.timeArr=hour+":"+min;;
-                this.trainId="3333"+temp[0]+"0"+temp[1];
+                min = min - 1;
+                temp[1] = min.toString();
+                this.timeArr = hour + ":" + min;
+                ;
+                this.trainId = "3333" + temp[0] + "0" + temp[1];
             } else {
-                if(hour+1>12) {
-                    hour=1;
+                if (hour + 1 > 12) {
+                    hour = 1;
                 }
 
-                if(min+10>60) {
+                if (min + 10 > 60) {
                     hour++;
-                    min=min+10-60;
+                    min = min + 10 - 60;
+                } else {
+                    min = min + 10;
                 }
-                else {
-                    min=min+10;
-                }
-                temp[1]=min.toString();
-                this.trainId = "4444" + temp[0] +"0"+ temp[1];
-                this.timeArr=hour+":"+min;;
+                temp[1] = min.toString();
+                this.trainId = "4444" + temp[0] + "0" + temp[1];
+                this.timeArr = hour + ":" + min;
+                ;
             }
         }
-
     }
 
     public void setTimeDep(int min, int hour) {
+
+        int minTemp;
 
         //se è "leaving"
         try {
@@ -237,12 +233,23 @@ public class Estimate {
         }
     }
 
+    //non funziona
+    public void setBikeFlag() {
+        if (this.bikeFlag.equals("0")) {
+            this.bikeFlag = "No";
+        } else if (this.bikeFlag.equals("1")) {
+            this.bikeFlag = "Yes";
+        } else {
+            this.bikeFlag = "ERROR";
+        }
+    }
+
     public void setDelay() {
         int intDelay = Integer.parseInt(delay);
 
-        int temp = intDelay/60;
+        int temp = intDelay / 60;
 
-        if (intDelay%60 > 29) {
+        if (intDelay % 60 > 29) {
             temp++;
         }
 
@@ -250,7 +257,7 @@ public class Estimate {
     }
 
     public void setAbbr(String abbr) {
-        this.abbr=abbr;
+        this.abbr = abbr;
     }
 
     public void setTrainIdTime(int min, int hour) {
@@ -258,6 +265,7 @@ public class Estimate {
         setTimeDep(min, hour);
         setTrainId();
         setDelay();
+        setBikeFlag();
     }
 
     public String getTimeDep() {
