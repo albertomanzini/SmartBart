@@ -233,17 +233,6 @@ public class Estimate {
         }
     }
 
-    //non funziona
-    public void setBikeFlag() {
-        if (this.bikeFlag.equals("0")) {
-            this.bikeFlag = "No";
-        } else if (this.bikeFlag.equals("1")) {
-            this.bikeFlag = "Yes";
-        } else {
-            this.bikeFlag = "ERROR";
-        }
-    }
-
     public void setDelay() {
         int intDelay = Integer.parseInt(delay);
 
@@ -265,7 +254,6 @@ public class Estimate {
         setTimeDep(min, hour);
         setTrainId();
         setDelay();
-        setBikeFlag();
     }
 
     public String getTimeDep() {

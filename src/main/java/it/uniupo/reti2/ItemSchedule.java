@@ -76,6 +76,16 @@ public class ItemSchedule {
             this.trainId = "4444" + temp[0] + temp1[0];
         }
     }
+    
+    public void setBikeFlag() {
+        if (this.bikeFlag.equals("0")) {
+            this.bikeFlag = "No";
+        } else if (this.bikeFlag.equals("1")) {
+            this.bikeFlag = "Yes";
+        } else {
+            this.bikeFlag = "ERROR";
+        }
+    }
 
     public void setDelay(String delay) {
         this.delay=delay;

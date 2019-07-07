@@ -197,6 +197,12 @@ public class GatewayAPI {
                 }
             }
 
+            Iterator<ItemSchedule> iterator3 = gatewayBooking.getStationSchedule().getStationSchedule().getItemSchedule().iterator();
+
+            while(iterator3.hasNext()) {
+                iterator3.next().setBikeFlag();
+            }
+
             // prepare the JSON-related structure to return
             finalJson.put("date", gatewayBooking.getStationSchedule().getDate());
             finalJson.put("name", gatewayBooking.getStationSchedule().getStationSchedule().getName());
