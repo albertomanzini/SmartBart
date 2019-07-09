@@ -51,8 +51,6 @@ public class GatewayAPI {
 
             Map<String, Object> finalJson = new HashMap<>();
 
-           // System.out.println(gatewayDao.getRealTimeInfo().getRoot().getStation().get(0).getEtd().get(0).getEstimate());
-
             gatewayDao.getStationSchedule().setNewDate();
 
             Iterator<ItemSchedule> iterator = gatewayDao.getStationSchedule().getStationSchedule().getItemSchedule().iterator();
@@ -66,6 +64,18 @@ public class GatewayAPI {
 
             while (iter.hasNext()) {
                 iter.next().setStationDep();
+            }
+
+            Iterator<ItemSchedule> iteratorPrice = gatewayDao.getStationSchedule().getStationSchedule().getItemSchedule().iterator();
+
+            while (iteratorPrice.hasNext()) {
+                iteratorPrice.next().setPrice();
+            }
+
+            Iterator<ItemSchedule> iteratorPriceDouble = gatewayDao.getStationSchedule().getStationSchedule().getItemSchedule().iterator();
+
+            while (iteratorPriceDouble.hasNext()) {
+                iteratorPriceDouble.next().setPriceDouble();
             }
 
             // prepare the JSON-related structure to return
@@ -93,7 +103,7 @@ public class GatewayAPI {
                 while (iter1.hasNext()) {
                     iter1.next().setDest();
                 }
-            }catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println("There are no trains currently");
             }
 
@@ -102,15 +112,15 @@ public class GatewayAPI {
                 while (iter0.hasNext()) {
                     iter0.next().setTrainId();
                 }
-            }catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println("There are no trains currently");
                 finalJson.put("error", "There are no trains currently");
             }
 
             String[] timeArray = gatewayReal.getRealTimeInfo().getRoot().getTime().split(":");
 
-            int timeMin= Integer.parseInt(timeArray[1]);
-            int timeHour= Integer.parseInt(timeArray[0]);
+            int timeMin = Integer.parseInt(timeArray[1]);
+            int timeHour = Integer.parseInt(timeArray[0]);
 
             try {
                 //sortTrains(gatewayTemp.getRealTimeInfo().getRoot().getStation());
@@ -122,13 +132,13 @@ public class GatewayAPI {
                     }
                 }
                 finalJson.put("departures", gatewayReal.getRealTimeInfo().getRoot().getStation().get(0).getEtd());
-            }catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println("There are no trains currently");
                 finalJson.put("error", "There are no trains currently");
             }
 
 
-           //sortTrains(gatewayTemp.getRealTimeInfo().getRoot().getStation().get(0).getEtd());
+            //sortTrains(gatewayTemp.getRealTimeInfo().getRoot().getStation().get(0).getEtd());
 
             gatewayDao.getStationSchedule().setNewDate();
 
@@ -139,32 +149,10 @@ public class GatewayAPI {
             return finalJson;
         }, gson::toJson);
 
-        options("/*",
-                (request, response) -> {
-
-                    String accessControlRequestHeaders = request
-                            .headers("Access-Control-Request-Headers");
-                    if (accessControlRequestHeaders != null) {
-                        response.header("Access-Control-Allow-Headers",
-                                accessControlRequestHeaders);
-                    }
-
-                    String accessControlRequestMethod = request
-                            .headers("Access-Control-Request-Method");
-                    if (accessControlRequestMethod != null) {
-                        response.header("Access-Control-Allow-Methods",
-                                accessControlRequestMethod);
-                    }
-
-                    return "OK";
-                });
-
-        before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
-        post(baseURL+"/buy", "application/json", (req, res) -> {
-            res.type("application/json");
+        post(baseURL+"/buy", (req, res) -> {
             Map addRequest = gson.fromJson(req.body(), Map.class);
 
-            if(addRequest!=null && addRequest.containsKey("CF") && addRequest.containsKey("bike")) {
+            if (addRequest != null && addRequest.containsKey("CF") && addRequest.containsKey("bike")) {
                 String cf = String.valueOf(addRequest.get("CF"));
                 int bike = Integer.parseInt((String) addRequest.get("bike"));
                 String trainId = String.valueOf(addRequest.get("trainId"));
@@ -174,13 +162,9 @@ public class GatewayAPI {
                 System.out.println(trainId);
                 bartDao.addBooking(seats);
 
-                
-
-
 
                 res.status(201);
-            }
-            else {
+            } else {
                 halt(403);
             }
 
@@ -195,9 +179,9 @@ public class GatewayAPI {
 
             String newDate[] = date.split("-");
 
-            Gateway gatewayBooking=new Gateway(newDate[1]+"/"+newDate[2]+"/"+newDate[0]);
+            Gateway gatewayBooking = new Gateway(newDate[1] + "/" + newDate[2] + "/" + newDate[0]);
 
-            Map<String,Object> finalJson = new HashMap<>();
+            Map<String, Object> finalJson = new HashMap<>();
 
 
             Iterator<ItemSchedule> iterator = gatewayBooking.getStationSchedule().getStationSchedule().getItemSchedule().iterator();
@@ -213,16 +197,14 @@ public class GatewayAPI {
                 iter.next().setStationDep();
             }
 
-            if(station.equals("none")) {
+            if (station.equals("none")) {
 
-            }
-            else {
+            } else {
                 Iterator<ItemSchedule> iterator2 = gatewayBooking.getStationSchedule().getStationSchedule().getItemSchedule().iterator();
 
-                while(iterator2.hasNext()) {
-                    if(iterator2.next().getAbbr().equals(station)) {
-                    }
-                    else {
+                while (iterator2.hasNext()) {
+                    if (iterator2.next().getAbbr().equals(station)) {
+                    } else {
                         iterator2.remove();
                     }
                 }
@@ -230,16 +212,26 @@ public class GatewayAPI {
 
             Iterator<ItemSchedule> iterator3 = gatewayBooking.getStationSchedule().getStationSchedule().getItemSchedule().iterator();
 
-            while(iterator3.hasNext()) {
+            while (iterator3.hasNext()) {
                 iterator3.next().setBikeFlag();
+            }
+
+            Iterator<ItemSchedule> iteratorPrice = gatewayBooking.getStationSchedule().getStationSchedule().getItemSchedule().iterator();
+
+            while (iteratorPrice.hasNext()) {
+                iteratorPrice.next().setPrice();
+            }
+
+            Iterator<ItemSchedule> iteratorPriceDouble = gatewayBooking.getStationSchedule().getStationSchedule().getItemSchedule().iterator();
+
+            while (iteratorPriceDouble.hasNext()) {
+                iteratorPriceDouble.next().setPriceDouble();
             }
 
             // prepare the JSON-related structure to return
             finalJson.put("date", gatewayBooking.getStationSchedule().getDate());
             finalJson.put("name", gatewayBooking.getStationSchedule().getStationSchedule().getName());
             finalJson.put("station", gatewayBooking.getStationSchedule().getStationSchedule().getItemSchedule());
-
-
 
             //if(task==null)
             //   halt(404);

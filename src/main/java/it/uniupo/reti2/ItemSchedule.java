@@ -25,6 +25,12 @@ public class ItemSchedule {
     private String stationArr;
     private String delay;
 
+    @SerializedName(value = "@price")
+    private String price;
+
+    @SerializedName(value = "@priceDouble")
+    private String priceDouble;
+
     private String abbr=null;
 
     public void setStationArr() {
@@ -72,8 +78,10 @@ public class ItemSchedule {
             this.trainId="2222"+temp[0]+temp1[0];
         } else if (headStation.equals("RICH")) {
             this.trainId="3333"+temp[0]+temp1[0];
-        } else {
+        } else if (headStation.equals("SFIA")) {
             this.trainId = "4444" + temp[0] + temp1[0];
+        } else {
+            this.trainId = "5555" + temp[0] + temp1[0];
         }
     }
     
@@ -84,6 +92,34 @@ public class ItemSchedule {
             this.bikeFlag = "Yes";
         } else {
             this.bikeFlag = "ERROR";
+        }
+    }
+
+    public void setPrice () {
+        if(headStation.equals("Antioch")) {
+            this.price = "8.45$";
+        } else if (headStation.equals("Millbrae")) {
+            this.price = "4.35$";
+        } else if (headStation.equals("Richmond")) {
+            this.price = "5.75$";
+        } else if (headStation.equals("San Francisco International Airport")) {
+            this.price = "8.65$";
+        } else {
+            this.price = "7.65$";
+        }
+    }
+
+    public void setPriceDouble () {
+        if(headStation.equals("Antioch")) {
+            this.priceDouble = "16.90$";
+        } else if (headStation.equals("Millbrae")) {
+            this.priceDouble = "8.70$";
+        } else if (headStation.equals("Richmond")) {
+            this.priceDouble = "11.50$";
+        } else if (headStation.equals("San Francisco International Airport")) {
+            this.priceDouble = "17.30$";
+        } else {
+            this.priceDouble = "15.30$";
         }
     }
 
