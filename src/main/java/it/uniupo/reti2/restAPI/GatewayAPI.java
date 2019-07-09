@@ -2,6 +2,8 @@ package it.uniupo.reti2.restAPI;
 
 import com.google.gson.Gson;
 import it.uniupo.reti2.*;
+import spark.Filter;
+import spark.Spark;
 
 import java.util.*;
 
@@ -137,7 +139,29 @@ public class GatewayAPI {
             return finalJson;
         }, gson::toJson);
 
-        post(baseURL+"/buy", (req, res) -> {
+        options("/*",
+                (request, response) -> {
+
+                    String accessControlRequestHeaders = request
+                            .headers("Access-Control-Request-Headers");
+                    if (accessControlRequestHeaders != null) {
+                        response.header("Access-Control-Allow-Headers",
+                                accessControlRequestHeaders);
+                    }
+
+                    String accessControlRequestMethod = request
+                            .headers("Access-Control-Request-Method");
+                    if (accessControlRequestMethod != null) {
+                        response.header("Access-Control-Allow-Methods",
+                                accessControlRequestMethod);
+                    }
+
+                    return "OK";
+                });
+
+        before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
+        post(baseURL+"/buy", "application/json", (req, res) -> {
+            res.type("application/json");
             Map addRequest = gson.fromJson(req.body(), Map.class);
 
             if(addRequest!=null && addRequest.containsKey("CF") && addRequest.containsKey("bike")) {
