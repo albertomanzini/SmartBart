@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="bart.db" uuid="327ed6e9-e311-475c-b0b4-091ddae17ef9">
+    <data-source source="LOCAL" name="tasks.db" uuid="c638d5e1-038a-4f5a-8f8d-ce25eb238232">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>

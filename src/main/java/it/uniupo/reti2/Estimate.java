@@ -32,6 +32,10 @@ public class Estimate {
 
     private String timeArr;
 
+    private String price;
+
+    private String priceDouble;
+
     public String getLength() {
         return length;
     }
@@ -254,6 +258,36 @@ public class Estimate {
         setTimeDep(min, hour);
         setTrainId();
         setDelay();
+        setPrice();
+        setPriceDouble();
+    }
+
+    public void setPrice () {
+        if(abbr.equals("ANTC")) {
+            this.price = "8.45$";
+        } else if (abbr.equals("MLBR")) {
+            this.price = "4.35$";
+        } else if (abbr.equals("RICH")) {
+            this.price = "5.75$";
+        } else if (abbr.equals("SFIA")) {
+            this.price = "8.65$";
+        } else {
+            this.price = "7.65$";
+        }
+    }
+
+    public void setPriceDouble () {
+        if(abbr.equals("ANTC")) {
+            this.priceDouble = "16.90$";
+        } else if (abbr.equals("MLBR")) {
+            this.priceDouble = "8.70$";
+        } else if (abbr.equals("RICH")) {
+            this.priceDouble = "11.50$";
+        } else if (abbr.equals("SFIA")) {
+            this.priceDouble = "17.30$";
+        } else {
+            this.priceDouble = "15.30$";
+        }
     }
 
     public String getTimeDep() {
