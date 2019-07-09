@@ -3,10 +3,6 @@ package it.uniupo.reti2;
 import it.uniupo.reti2.restAPI.RouteInfo;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 public class Gateway {
 
     private RootStation station;

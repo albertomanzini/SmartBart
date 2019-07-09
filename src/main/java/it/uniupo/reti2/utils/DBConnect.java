@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DBConnect {
     // the DB location (on file, inside the project)
-    static private final String dbLoc = "jdbc:sqlite:src/main/resources/bart.db";
+    static private final String dbLoc = "jdbc:sqlite:src/main/java/it/uniupo/reti2/tasks.db";
     static private DBConnect instance = null;
 
     private DBConnect() {

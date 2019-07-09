@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 
-public class TaskDao {
+public class BartDao {
 
 
     public void addBooking(Passenger passenger) {

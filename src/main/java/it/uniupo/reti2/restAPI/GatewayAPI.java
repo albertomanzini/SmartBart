@@ -14,6 +14,7 @@ public class GatewayAPI {
         Gson gson = new Gson();
         String baseURL = "gateway/api/";
         Gateway gatewayDao = new Gateway();
+        BartDao bartDao = new BartDao();
 
         // get station info
         get(baseURL + "/stninfo", "application/json", (request, response) -> {
@@ -142,9 +143,12 @@ public class GatewayAPI {
             if(addRequest!=null && addRequest.containsKey("CF") && addRequest.containsKey("bike")) {
                 String cf = String.valueOf(addRequest.get("CF"));
                 int bike = Integer.parseInt((String) addRequest.get("bike"));
-                String trainId = String.valueOf(addRequest.get("traindId"));
+                String trainId = String.valueOf(addRequest.get("trainId"));
 
                 Passenger seats = new Passenger(cf, bike, trainId);
+
+                System.out.println(trainId);
+                bartDao.addBooking(seats);
 
                 
 
