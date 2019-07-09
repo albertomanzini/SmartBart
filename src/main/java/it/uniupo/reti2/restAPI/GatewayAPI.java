@@ -165,8 +165,6 @@ public class GatewayAPI {
             String date = request.params(":date");
             String station = request.params(":station");
 
-
-
             String newDate[] = date.split("-");
 
             Gateway gatewayBooking=new Gateway(newDate[1]+"/"+newDate[2]+"/"+newDate[0]);
@@ -187,13 +185,18 @@ public class GatewayAPI {
                 iter.next().setStationDep();
             }
 
-            Iterator<ItemSchedule> iterator2 = gatewayBooking.getStationSchedule().getStationSchedule().getItemSchedule().iterator();
+            if(station.equals("none")) {
 
-            while(iterator2.hasNext()) {
-                if(iterator2.next().getAbbr().equals(station)) {
-                }
-                else {
-                    iterator2.remove();
+            }
+            else {
+                Iterator<ItemSchedule> iterator2 = gatewayBooking.getStationSchedule().getStationSchedule().getItemSchedule().iterator();
+
+                while(iterator2.hasNext()) {
+                    if(iterator2.next().getAbbr().equals(station)) {
+                    }
+                    else {
+                        iterator2.remove();
+                    }
                 }
             }
 
