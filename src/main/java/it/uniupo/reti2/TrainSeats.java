@@ -1,15 +1,31 @@
 package it.uniupo.reti2;
 
+import it.uniupo.reti2.restAPI.Passenger;
+
+import java.util.ArrayList;
+
 public class TrainSeats {
 
-    private int seats;
+    private int seats=10;
     private int bookedSeats;
     private int bikeNumber;
-
+    private String trainId;
+    private String date;
     private int bikeCounter=0;
 
-    public TrainSeats(int lenght) {
-        this.seats=lenght*40;
+    public TrainSeats(String trainId, String date) {
+
+        this.seats=this.seats*10;
+        this.trainId=trainId;
+        this.date=date;
+    }
+
+    public String getTrainId() {
+        return trainId;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public int bookingSeat() {
