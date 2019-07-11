@@ -40,6 +40,7 @@ public class RootSchedule {
         if(Integer.parseInt(temp[0])<10) {
             month="0"+temp[0];
         }
+
         this.newDate=month+"-"+day;
 
     }
