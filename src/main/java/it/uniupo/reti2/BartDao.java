@@ -12,7 +12,7 @@ public class BartDao {
 
 
     public void addBooking(Passenger passenger) {
-        final String sql = "INSERT INTO BART(traveler_name, bicycle, train_id) VALUES (?, ?, ?)";
+        final String sql = "INSERT INTO BART(traveler_name, bicycle, train_id, date) VALUES (?, ?, ?, ?)";
 
         try {
             Connection conn = DBConnect.getInstance().getConnection();
@@ -20,6 +20,7 @@ public class BartDao {
             st.setString(1, passenger.getCf());
             st.setInt(2, passenger.getBicycle());
             st.setString(3, passenger.getTrainId());
+            st.setString(4, passenger.getDate());
 
             st.executeUpdate();
 

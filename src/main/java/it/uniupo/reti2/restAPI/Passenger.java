@@ -5,11 +5,13 @@ public class Passenger {
     String cf;
     int bicycle;
     String trainId;
+    String date;
 
-    public Passenger(String cf, int bicycle, String trainId) {
-        this.cf=cf;
-        this.bicycle=bicycle;
-        this.trainId=trainId;
+    public Passenger(String cf, int bicycle, String trainId, String date) {
+        this.cf = cf;
+        this.bicycle = bicycle;
+        this.trainId = trainId;
+        this.date = date;
     }
 
     public String getCf() {
@@ -22,5 +24,9 @@ public class Passenger {
 
     public String getTrainId() {
         return trainId;
+    }
+
+    public String getDate() {
+        return date;
     }
 }

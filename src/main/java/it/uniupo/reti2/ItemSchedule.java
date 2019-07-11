@@ -31,16 +31,14 @@ public class ItemSchedule {
     @SerializedName(value = "@priceDouble")
     private String priceDouble;
 
-    private String abbr=null;
+    private String abbr = null;
 
     public void setStationArr() {
         if (line.equals("ROUTE 2") || line.equals("ROUTE 8")) {
             stationArr = "Millbrae";
-        }
-        else if(line.equals("ROUTE 1")) {
+        } else if (line.equals("ROUTE 1")) {
             stationArr = "Antioch";
-        }
-        else if(line.equals("ROUTE 7")) {
+        } else if (line.equals("ROUTE 7")) {
             stationArr = "Richmond";
         }
     }
@@ -48,43 +46,39 @@ public class ItemSchedule {
     public void setStationDep() {
         if (headStation.equals("ANTC")) {
             headStation = "Antioch";
-            this.abbr="antc";
-        }
-        else if(headStation.equals("RICH")) {
+            this.abbr = "antc";
+        } else if (headStation.equals("RICH")) {
             headStation = "Richmond";
-            this.abbr="rich";
-        }
-        else if(headStation.equals("MLBR")) {
+            this.abbr = "rich";
+        } else if (headStation.equals("MLBR")) {
             headStation = "Millbrae";
-            this.abbr="mlbr";
-        }
-        else if(headStation.equals("SFIA")) {
+            this.abbr = "mlbr";
+        } else if (headStation.equals("SFIA")) {
             headStation = "San Francisco International Airport";
-            this.abbr="sfia";
-        }
-        else if(headStation.equals("PITT")) {
+            this.abbr = "sfia";
+        } else if (headStation.equals("PITT")) {
             headStation = "Pittsburg/Bay Point";
-            this.abbr= "pitt";
+            this.abbr = "pitt";
 
         }
     }
 
     public void setTrainId() {
-        String[] temp=originTime.split(":");
-        String[] temp1=temp[1].split(" ");
-        if(headStation.equals("ANTC")) {
-            this.trainId="1111"+temp[0]+temp1[0];
+        String[] temp = originTime.split(":");
+        String[] temp1 = temp[1].split(" ");
+        if (headStation.equals("ANTC")) {
+            this.trainId = "1111" + temp[0] + temp1[0];
         } else if (headStation.equals("MLBR")) {
-            this.trainId="2222"+temp[0]+temp1[0];
+            this.trainId = "2222" + temp[0] + temp1[0];
         } else if (headStation.equals("RICH")) {
-            this.trainId="3333"+temp[0]+temp1[0];
+            this.trainId = "3333" + temp[0] + temp1[0];
         } else if (headStation.equals("SFIA")) {
             this.trainId = "4444" + temp[0] + temp1[0];
         } else {
             this.trainId = "5555" + temp[0] + temp1[0];
         }
     }
-    
+
     public void setBikeFlag() {
         if (this.bikeFlag.equals("0")) {
             this.bikeFlag = "No";
@@ -95,8 +89,8 @@ public class ItemSchedule {
         }
     }
 
-    public void setPrice () {
-        if(headStation.equals("Antioch")) {
+    public void setPrice() {
+        if (headStation.equals("Antioch")) {
             this.price = "8.45$";
         } else if (headStation.equals("Millbrae")) {
             this.price = "4.35$";
@@ -109,8 +103,8 @@ public class ItemSchedule {
         }
     }
 
-    public void setPriceDouble () {
-        if(headStation.equals("Antioch")) {
+    public void setPriceDouble() {
+        if (headStation.equals("Antioch")) {
             this.priceDouble = "16.90$";
         } else if (headStation.equals("Millbrae")) {
             this.priceDouble = "8.70$";
@@ -124,7 +118,7 @@ public class ItemSchedule {
     }
 
     public void setDelay(String delay) {
-        this.delay=delay;
+        this.delay = delay;
     }
 
     public String getStationDep() {

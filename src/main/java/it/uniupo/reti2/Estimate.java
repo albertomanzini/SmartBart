@@ -82,7 +82,6 @@ public class Estimate {
                 temp[1] = min.toString();
                 this.trainId = "1111" + temp[0] + temp[1];
                 this.timeArr = hour + ":" + min;
-                ;
             } else if (abbr.equals("MLBR")) {
                 if (hour + 1 > 12) {
                     hour = 1;
@@ -98,7 +97,6 @@ public class Estimate {
                 temp[1] = min.toString();
                 this.trainId = "2222" + temp[0] + temp[1];
                 this.timeArr = hour + ":" + min;
-                ;
             } else if (abbr.equals("RICH")) {
                 if (hour + 1 > 12) {
                     hour = 1;
@@ -114,7 +112,6 @@ public class Estimate {
                 temp[1] = min.toString();
                 this.trainId = "3333" + temp[0] + temp[1];
                 this.timeArr = hour + ":" + min;
-                ;
             } else {
                 if (hour + 1 > 12) {
                     hour = 1;
@@ -129,7 +126,6 @@ public class Estimate {
                 temp[1] = min.toString();
                 this.trainId = "4444" + temp[0] + temp[1];
                 this.timeArr = hour + ":" + min;
-                ;
             }
         } else {
             if (abbr.equals("ANTC")) {
@@ -165,7 +161,6 @@ public class Estimate {
                 temp[1] = min.toString();
                 this.trainId = "2222" + temp[0] + "0" + temp[1];
                 this.timeArr = hour + ":" + min;
-                ;
             } else if (abbr.equals("RICH")) {
                 if (hour + 1 > 12) {
                     hour = 1;
@@ -180,7 +175,6 @@ public class Estimate {
                 min = min - 1;
                 temp[1] = min.toString();
                 this.timeArr = hour + ":" + min;
-                ;
                 this.trainId = "3333" + temp[0] + "0" + temp[1];
             } else {
                 if (hour + 1 > 12) {
@@ -196,7 +190,6 @@ public class Estimate {
                 temp[1] = min.toString();
                 this.trainId = "4444" + temp[0] + "0" + temp[1];
                 this.timeArr = hour + ":" + min;
-                ;
             }
         }
     }

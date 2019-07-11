@@ -142,6 +142,7 @@ public class GatewayAPI {
 
             gatewayDao.getStationSchedule().setNewDate();
 
+            finalJson.put("date", gatewayDao.getStationSchedule().getDate());
             finalJson.put("newdate", gatewayDao.getStationSchedule().getNewDate());
             finalJson.put("time", gatewayReal.getRealTimeInfo().getRoot().getTime());
             finalJson.put("station", gatewayReal.getStationSchedule().getStationSchedule().getItemSchedule());
@@ -178,8 +179,9 @@ public class GatewayAPI {
                 String cf = String.valueOf(addRequest.get("CF"));
                 int bike = Integer.parseInt((String) addRequest.get("bike"));
                 String trainId = String.valueOf(addRequest.get("trainId"));
+                String date = String.valueOf(addRequest.get("date"));
 
-                Passenger seats = new Passenger(cf, bike, trainId);
+                Passenger seats = new Passenger(cf, bike, trainId, date);
 
                 System.out.println(trainId);
                 bartDao.addBooking(seats);
