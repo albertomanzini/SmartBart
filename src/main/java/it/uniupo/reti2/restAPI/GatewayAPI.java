@@ -2,6 +2,10 @@ package it.uniupo.reti2.restAPI;
 
 import com.google.gson.Gson;
 import it.uniupo.reti2.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.web.client.RestTemplate;
 import spark.Filter;
 import spark.Spark;
 
@@ -13,10 +17,12 @@ public class GatewayAPI {
 
     public static void main(String[] args) {
         // init
+
         Gson gson = new Gson();
         String baseURL = "gateway/api/";
         Gateway gatewayDao = new Gateway();
         BartDao bartDao = new BartDao();
+        ArrayList<TrainSeats> trains = new ArrayList<>();
 
         // get station info
         get(baseURL + "/stninfo", "application/json", (request, response) -> {
@@ -180,12 +186,28 @@ public class GatewayAPI {
                 int bike = Integer.parseInt((String) addRequest.get("bike"));
                 String trainId = String.valueOf(addRequest.get("trainId"));
                 String date = String.valueOf(addRequest.get("date"));
-
+                int i=55;
                 Passenger seats = new Passenger(cf, bike, trainId, date);
 
-                System.out.println(trainId);
-                bartDao.addBooking(seats);
+                Iterator<TrainSeats> iterator = trains.iterator();
+                if(trains.isEmpty()) {
+                    TrainSeats trainTemp = new TrainSeats(trainId, date);
+                    i=trainTemp.bookingSeat();
+                    trains.add(trainTemp);
 
+                }
+                else {
+                    while (iterator.hasNext()) {
+                        if(iterator.next().getTrainId().equals(trainId) && iterator.next().getDate().equals(date)) {
+                            i=iterator.next().bookingSeat();
+                        }
+                    }
+                }
+
+
+
+                bartDao.addBooking(seats);
+                System.out.println(i);
 
                 res.status(201);
             } else {
@@ -270,130 +292,36 @@ public class GatewayAPI {
             return finalJson;
         }, gson::toJson);
     }
-}
-    /*
-    private static void sortTrains(ArrayList<Etd> station) {
 
-        ArrayList<Estimate> trains=null;
+    public void lightInit(int i) {
 
-        String firstHour=null;
+        String lightsURL;
+        RestTemplate rest=new RestTemplate();;
 
-        Iterator<Etd> iterator = station.iterator();
-        while (iterator.hasNext()) {
-            Iterator<Estimate> iter = iterator.next().getEstimate().iterator();
-            while (iter.hasNext()) {
-                if(firstHour.isEmpty()) {
-                    firstHour = iter.next().getTimeDep();
-                }
-                else {
-                    trains.add(iter.next());
-                }
+        String baseURL = "http://localhost:8000";
+        String username = "newdeveloper";
 
-            }
-        }
-    }*
-}
+        lightsURL = baseURL + "/api/" + username + "/lights/";
 
-        // add a new task
-        post(baseURL + "/changedate", (request, response) -> {
-            // get the body of the HTTP request
-            Map addRequest = gson.fromJson(request.body(), Map.class);
+        String getLucebri = "http://localhost:8000/lights/1";
 
-            // check whether everything is in place
-            if(addRequest!=null && addRequest.containsKey("date") && addRequest.containsKey("station")) {
-                String date = String.valueOf(addRequest.get("date"));
-                // gson convert JSON num in double, but we need an int
-                //int urgent = ((Double) addRequest.get("urgent")).intValue();
+        int brightness = 25;
 
-                // add the task into the DB
-                gatewayDao.addTask(new Task(description, urgent));
+        String onLightsNew = "{ \"on\" : true,\"hue\" : 25500, \"bri\" : " + brightness + "}";
+        String offLights = "{ \"on\" : false}";
 
-                // if success, prepare a suitable HTTP response code
-                response.status(201);
-            }
-            else {
-                halt(403);
-            }
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        // create the HTTP request
+        HttpEntity<String> onRequestNew = new HttpEntity<>(onLightsNew, headers);
+        HttpEntity<String> offRequest = new HttpEntity<>(offLights, headers);
 
-            return "";
-        });
-
-
+        //changeStatus("/api/newdeveloper/lights/1", onRequestNew);
+        //changeStatus("/api/newdeveloper/lights/2", onRequestNew);
+        //changeStatus("/api/newdeveloper/lights/3", onRequestNew);
     }
-
-}
-/*
-package it.uniupo.reti2;
-
-        import static spark.Spark.*;
-
-        import com.google.gson.Gson;
-
-        import java.util.List;
-        import java.util.Map;
-
-        import static spark.Spark.*;
-
-public class TaskService {
-
-    public static void main(String[] args) {
-
-        gatewayDao gatewayDao = new gatewayDao();
-        Gson gson = new gGson();
-
-        //get all tasks
-        get(path:"/api/v1/tasks", acceptType: /application/json(req, res) -> {
-
-            //set proper response code and type
-            res.type(contentType:"application/json");
-            res.status(statusCode: 200);
-
-            //get all tasks from DB
-            List<gatewayDao> allTasks = gatewayDao.getAllTasks();
-
-            //prepare json
-            Map<String, List<Task>> finalJson = new HashMap<>();
-            finalJson.put("tasks", allTasks);
-
-            return finalJson;
-        }, gson::toJson);
-
-        //get a single task
-        get(path:"/api/v1/tasks/:id", acceptType: /application/json(req, res) -> {
-            Task task = gatewayDao.getTask(Integer.valueOf(req.params(":id")));
-
-            if (task==null)
-                halt(404);
-
-            res.type(contentType:"application/json");
-            res.status(statusCode: 200);
-            Map<String, Task> finalJson = new HashMap<>();
-            finalJson.put("tasks", tasks);
-
-            return finalJson;
-        }, gson::toJson);
-
-        post("api/v1/tasks", (req, res) -> {
-            Map addRequest = gson.fromJson(req.body(), Map.class);
-
-            if(addRequest!=null && addRequest.containsKey("description") && addRequest.containsKey("urgent")) {
-                String description = String.valueOf(addRequest.get("description"));
-                int urgent = ((Double)addRequest.get("urgent")).intValue();
-
-                gatewayDao.addTask(new Task(description, urgent));
-
-                res.status(201);
-            }
-            else {
-                halt(403);
-            }
-
-            return "";
-        })
-
+    private void changeStatus(String lightId, HttpEntity request, String lightsURL, RestTemplate rest) {
+        String callURL = lightsURL + lightId + "/state";
+        rest.put(callURL, request);
     }
-
 }
-
-
- */
