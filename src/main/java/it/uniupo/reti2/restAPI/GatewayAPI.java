@@ -128,13 +128,17 @@ public class GatewayAPI {
             int timeMin = Integer.parseInt(timeArray[1]);
             int timeHour = Integer.parseInt(timeArray[0]);
 
+            String[] timeTemp = timeArray[2].split(" ");
+
+            String timeAMPM = timeTemp[1];
+
             try {
                 //sortTrains(gatewayTemp.getRealTimeInfo().getRoot().getStation());
                 Iterator<Etd> iter = gatewayReal.getRealTimeInfo().getRoot().getStation().get(0).getEtd().iterator();
                 while (iter.hasNext()) {
                     Iterator<Estimate> iterator = iter.next().getEstimate().iterator();
                     while (iterator.hasNext()) {
-                        iterator.next().setTrainIdTime(timeMin, timeHour);
+                        iterator.next().setTrainIdTime(timeMin, timeHour, timeAMPM);
                     }
                 }
                 finalJson.put("departures", gatewayReal.getRealTimeInfo().getRoot().getStation().get(0).getEtd());
