@@ -67,7 +67,7 @@ public class Estimate {
         if (min > 10) {
             if (abbr.equals("ANTC")) {
                 if (hour + 1 > 12) {
-                    hour = 1;
+                    hour =- 12;
                 } else {
                     hour = hour + 1;
                 }
@@ -84,7 +84,7 @@ public class Estimate {
                 this.timeArr = hour + ":" + min;
             } else if (abbr.equals("MLBR")) {
                 if (hour + 1 > 12) {
-                    hour = 1;
+                    hour =- 12;
                 }
 
                 if (min + 11 > 60) {
@@ -99,7 +99,7 @@ public class Estimate {
                 this.timeArr = hour + ":" + min;
             } else if (abbr.equals("RICH")) {
                 if (hour + 1 > 12) {
-                    hour = 1;
+                    hour =- 12;
                 }
 
                 if (min + 57 > 60) {
@@ -114,7 +114,7 @@ public class Estimate {
                 this.timeArr = hour + ":" + min;
             } else {
                 if (hour + 1 > 12) {
-                    hour = 1;
+                    hour =- 12;
                 }
 
                 if (min + 10 > 60) {
@@ -194,11 +194,8 @@ public class Estimate {
         }
     }
 
-    public void setTimeDep(int min, int hour) {
+    public void setTimeDep(int min, int hour, String timeAMPM) {
 
-        int minTemp;
-
-        //se è "leaving"
         try {
             int intMin = Integer.parseInt(minutes);
         } catch (NumberFormatException e) {
@@ -246,9 +243,9 @@ public class Estimate {
         this.abbr = abbr;
     }
 
-    public void setTrainIdTime(int min, int hour) {
+    public void setTrainIdTime(int min, int hour, String timeAMPM) {
 
-        setTimeDep(min, hour);
+        setTimeDep(min, hour, timeAMPM);
         setTrainId();
         setDelay();
         setPrice();
