@@ -80,8 +80,8 @@ public class GatewayAPI {
             }
 
             // prepare the JSON-related structure to return
-            finalJson.put("date", gatewayDao.getStationSchedule().getDate());
             finalJson.put("newdate", gatewayDao.getStationSchedule().getNewDate());
+            finalJson.put("date", gatewayDao.getStationSchedule().getDate());
             finalJson.put("name", gatewayDao.getStationSchedule().getStationSchedule().getName());
             finalJson.put("station", gatewayDao.getStationSchedule().getStationSchedule().getItemSchedule());
             //finalJson.put("nameDep",  name);
@@ -267,10 +267,13 @@ public class GatewayAPI {
                 iteratorPriceDouble.next().setPriceDouble();
             }
 
+            gatewayDao.getStationSchedule().setNewDate();
+
             // prepare the JSON-related structure to return
             finalJson.put("date", gatewayBooking.getStationSchedule().getDate());
             finalJson.put("name", gatewayBooking.getStationSchedule().getStationSchedule().getName());
             finalJson.put("station", gatewayBooking.getStationSchedule().getStationSchedule().getItemSchedule());
+            finalJson.put("newdate", gatewayDao.getStationSchedule().getNewDate());
 
             //if(task==null)
             //   halt(404);
