@@ -8,7 +8,6 @@ public class TrainSeats {
 
     private int seats=10;
     private int bookedSeats;
-    private int bikeNumber;
     private String trainId;
     private String date;
     private int bikeCounter=0;

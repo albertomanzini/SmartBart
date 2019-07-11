@@ -2,6 +2,10 @@ package it.uniupo.reti2.restAPI;
 
 import com.google.gson.Gson;
 import it.uniupo.reti2.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.web.client.RestTemplate;
 import spark.Filter;
 import spark.Spark;
 
@@ -13,6 +17,7 @@ public class GatewayAPI {
 
     public static void main(String[] args) {
         // init
+
         Gson gson = new Gson();
         String baseURL = "gateway/api/";
         Gateway gatewayDao = new Gateway();
@@ -199,6 +204,8 @@ public class GatewayAPI {
                     }
                 }
 
+
+
                 bartDao.addBooking(seats);
                 System.out.println(i);
 
@@ -284,5 +291,37 @@ public class GatewayAPI {
 
             return finalJson;
         }, gson::toJson);
+    }
+
+    public void lightInit(int i) {
+
+        String lightsURL;
+        RestTemplate rest=new RestTemplate();;
+
+        String baseURL = "http://localhost:8000";
+        String username = "newdeveloper";
+
+        lightsURL = baseURL + "/api/" + username + "/lights/";
+
+        String getLucebri = "http://localhost:8000/lights/1";
+
+        int brightness = 25;
+
+        String onLightsNew = "{ \"on\" : true,\"hue\" : 25500, \"bri\" : " + brightness + "}";
+        String offLights = "{ \"on\" : false}";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        // create the HTTP request
+        HttpEntity<String> onRequestNew = new HttpEntity<>(onLightsNew, headers);
+        HttpEntity<String> offRequest = new HttpEntity<>(offLights, headers);
+
+        //changeStatus("/api/newdeveloper/lights/1", onRequestNew);
+        //changeStatus("/api/newdeveloper/lights/2", onRequestNew);
+        //changeStatus("/api/newdeveloper/lights/3", onRequestNew);
+    }
+    private void changeStatus(String lightId, HttpEntity request, String lightsURL, RestTemplate rest) {
+        String callURL = lightsURL + lightId + "/state";
+        rest.put(callURL, request);
     }
 }
