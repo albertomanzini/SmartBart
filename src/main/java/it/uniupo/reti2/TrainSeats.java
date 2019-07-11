@@ -27,18 +27,30 @@ public class TrainSeats {
         return date;
     }
 
-    public int bookingSeat() {
-        if (bookedSeats<seats && bikeCounter<10) {
-            bookedSeats++;
-            bikeCounter++;
-            return 1;
-        }
-        else if(bookedSeats<seats && bikeCounter>=10){
-            bookedSeats++;
-            return 2;
+    public int bookingSeat(int bikeFlag) {
+        if(bikeFlag==1) {
+            if (bookedSeats<seats && bikeCounter<10) {
+                bookedSeats++;
+                bikeCounter++;
+                return 1;
+            }
+            else if(bookedSeats<seats && bikeCounter>=10){
+                bookedSeats++;
+                return 2;
+            }
+            else {
+                return 0;
+            }
         }
         else {
-            return 0;
+            if (bookedSeats<seats) {
+                bookedSeats++;
+                return 1;
+            }
+            else {
+                return 0;
+            }
         }
+
     }
 }

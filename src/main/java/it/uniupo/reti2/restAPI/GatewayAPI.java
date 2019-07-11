@@ -192,17 +192,26 @@ public class GatewayAPI {
                 Iterator<TrainSeats> iterator = trains.iterator();
                 if(trains.isEmpty()) {
                     TrainSeats trainTemp = new TrainSeats(trainId, date);
-                    i=trainTemp.bookingSeat();
+                    i=trainTemp.bookingSeat(bike);
                     trains.add(trainTemp);
 
                 }
                 else {
                     while (iterator.hasNext()) {
-                        if(iterator.next().getTrainId().equals(trainId) && iterator.next().getDate().equals(date)) {
-                            i=iterator.next().bookingSeat();
+                        TrainSeats trainTemp=iterator.next();
+                        if(trainTemp.getTrainId().equals(trainId) && trainTemp.getDate().equals(date)) {
+                            i=trainTemp.bookingSeat(bike);
+                        }
+                        else {
+                            trainTemp = new TrainSeats(trainId, date);
+                            i=trainTemp.bookingSeat(bike);
+                            trains.add(trainTemp);
+                            break;
                         }
                     }
                 }
+
+                lightInit(i);
 
 
 
@@ -293,7 +302,7 @@ public class GatewayAPI {
         }, gson::toJson);
     }
 
-    public void lightInit(int i) {
+    public static void lightInit(int i) {
 
         String lightsURL;
         RestTemplate rest=new RestTemplate();;
@@ -315,12 +324,22 @@ public class GatewayAPI {
         // create the HTTP request
         HttpEntity<String> onRequestNew = new HttpEntity<>(onLightsNew, headers);
         HttpEntity<String> offRequest = new HttpEntity<>(offLights, headers);
+        switch (i) {
+            case 1:
+                changeStatus("/api/newdeveloper/lights/1", onRequestNew, lightsURL, rest);
+                changeStatus("/api/newdeveloper/lights/2", onRequestNew, lightsURL, rest);
+                changeStatus("/api/newdeveloper/lights/3", onRequestNew, lightsURL, rest);
+            case 2:
+                //changeStatus("/api/newdeveloper/lights/2", onRequestNew);
+            case 3:
+                //changeStatus("/api/newdeveloper/lights/3", onRequestNew);
+        }
 
-        //changeStatus("/api/newdeveloper/lights/1", onRequestNew);
-        //changeStatus("/api/newdeveloper/lights/2", onRequestNew);
-        //changeStatus("/api/newdeveloper/lights/3", onRequestNew);
+
+
+
     }
-    private void changeStatus(String lightId, HttpEntity request, String lightsURL, RestTemplate rest) {
+    private static void changeStatus(String lightId, HttpEntity request, String lightsURL, RestTemplate rest) {
         String callURL = lightsURL + lightId + "/state";
         rest.put(callURL, request);
     }
