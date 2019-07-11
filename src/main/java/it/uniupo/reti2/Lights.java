@@ -8,10 +8,14 @@ import org.springframework.web.client.RestTemplate;
 
 public class Lights {
 
-    private static String lightsURL;
-    private static RestTemplate rest;
+    private String lightsURL;
+    private RestTemplate rest;
 
-    public static void main(String[] args) throws InterruptedException {
+    public void Lights() {
+
+    }
+
+    public void lightsOn(String[] args) throws InterruptedException {
 
         String baseURL = "http://localhost:8000";
         String username = "newdeveloper";
@@ -23,7 +27,7 @@ public class Lights {
 
         int brightness = 25;
 
-        String onLightsNew = "{ \"on\" : true,\"hue\" : 21845, \"bri\" : " + brightness + "}";
+        String onLightsNew = "{ \"on\" : true,\"hue\" : 25500, \"bri\" : " + brightness + "}";
         String offLights = "{ \"on\" : false}";
 
         HttpHeaders headers = new HttpHeaders();
@@ -38,7 +42,7 @@ public class Lights {
 
     }
 
-    private static void changeStatus(String lightId, HttpEntity request) {
+    private void changeStatus(String lightId, HttpEntity request) {
         String callURL = lightsURL + lightId + "/state";
         rest.put(callURL, request);
     }
