@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class DBConnect {
     // the DB location (on file, inside the project)
-    static private final String dbLoc = "jdbc:mysql:dbname=my_pweb1718manzinia;host=localhost";
-    //static private final String dbLoc = "jdbc:sqlite:src/main/resources/BARTdb";
+    //static private final String dbLoc = "jdbc:mysql:dbname=my_pweb1718manzinia;host=localhost";
+    static private final String dbLoc = "jdbc:sqlite:src/main/resources/BARTdb";
     static private DBConnect instance = null;
 
     private DBConnect() {
