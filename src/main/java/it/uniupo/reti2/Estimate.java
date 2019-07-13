@@ -215,16 +215,22 @@ public class Estimate {
 
             if (min < 10) {
                 this.timeDep = hour + ":0" + min;
+                //this.timeDep=timeDep+timeAMPM;
             } else {
                 this.timeDep = hour + ":" + min;
+                //this.timeDep=timeDep+timeAMPM;
             }
         } else {
             if (min < 10) {
                 this.timeDep = hour + ":0" + min;
+                //this.timeDep=timeDep+timeAMPM;
             } else {
                 this.timeDep = hour + ":" + min;
+                //this.timeDep=timeDep+timeAMPM;
             }
         }
+
+
     }
 
     public void setDelay() {

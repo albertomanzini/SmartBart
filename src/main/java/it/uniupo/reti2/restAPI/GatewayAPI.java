@@ -130,7 +130,7 @@ public class GatewayAPI {
 
             String[] timeTemp = timeArray[2].split(" ");
 
-            String timeAMPM = timeTemp[1];
+            String timeAMPM=timeTemp[1];
 
             try {
                 //sortTrains(gatewayTemp.getRealTimeInfo().getRoot().getStation());
@@ -156,6 +156,7 @@ public class GatewayAPI {
             finalJson.put("newdate", gatewayDao.getStationSchedule().getNewDate());
             finalJson.put("time", gatewayReal.getRealTimeInfo().getRoot().getTime());
             finalJson.put("station", gatewayReal.getStationSchedule().getStationSchedule().getItemSchedule());
+            finalJson.put("timeAMPM", timeAMPM);
 
             return finalJson;
         }, gson::toJson);
