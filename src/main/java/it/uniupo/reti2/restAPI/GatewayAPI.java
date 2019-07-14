@@ -11,6 +11,7 @@ import spark.Spark;
 
 import java.util.*;
 
+import static java.lang.Thread.*;
 import static spark.Spark.*;
 
 public class GatewayAPI {
@@ -324,12 +325,14 @@ public class GatewayAPI {
 
         String onLightsNew = "{ \"on\" : true,\"hue\" : 25500, \"bri\" : " + brightness + "}";
         String fullByke = "{ \"on\" : true, \"hue\" : 65535, \"bri\" : 200}";
+        String offLight = "{ \"on\" : false}";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         // create the HTTP request
         HttpEntity<String> onRequestNew = new HttpEntity<>(onLightsNew, headers);
         HttpEntity<String> fullBykeReq = new HttpEntity<>(fullByke, headers);
+        HttpEntity<String> offLightReq = new HttpEntity<>(offLight, headers);
         switch (i.getReturnValue()) {
             case 1:
                 changeStatus("/api/newdeveloper/lights/1", onRequestNew, lightsURL, rest);
@@ -337,10 +340,25 @@ public class GatewayAPI {
                 //changeStatus("/api/newdeveloper/lights/2", onRequestNew, lightsURL, rest);
                 //changeStatus("/api/newdeveloper/lights/3", onRequestNew, lightsURL, rest);
             case 2:
-                changeStatus("/api/newdeveloper/lights/1", fullBykeReq, lightsURL, rest);
+                int j;
+                for(j=0;j<5;j++) {
+                    try {
+                        changeStatus("/api/newdeveloper/lights/1", fullBykeReq, lightsURL, rest);
+                        Thread.sleep(1000);
+                        changeStatus("/api/newdeveloper/lights/1", offLightReq, lightsURL, rest);
+                        Thread.sleep(1000);
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                }
                 break;
                 //changeStatus("/api/newdeveloper/lights/2", fullBykeReq, lightsURL, rest);
                // changeStatus("/api/newdeveloper/lights/3", fullBykeReq, lightsURL, rest);
+            case 3:
+                changeStatus("/api/newdeveloper/lights/1", offLightReq, lightsURL, rest);
+                break;
 
             default:
                 break;
