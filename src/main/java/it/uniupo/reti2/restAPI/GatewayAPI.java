@@ -130,7 +130,7 @@ public class GatewayAPI {
 
             String[] timeTemp = timeArray[2].split(" ");
 
-            String timeAMPM = timeTemp[1];
+            String timeAMPM=timeTemp[1];
 
             try {
                 //sortTrains(gatewayTemp.getRealTimeInfo().getRoot().getStation());
@@ -156,6 +156,7 @@ public class GatewayAPI {
             finalJson.put("newdate", gatewayDao.getStationSchedule().getNewDate());
             finalJson.put("time", gatewayReal.getRealTimeInfo().getRoot().getTime());
             finalJson.put("station", gatewayReal.getStationSchedule().getStationSchedule().getItemSchedule());
+            finalJson.put("timeAMPM", timeAMPM);
 
             return finalJson;
         }, gson::toJson);
@@ -185,6 +186,8 @@ public class GatewayAPI {
         post(baseURL+"/buy", (req, res) -> {
             Map addRequest = gson.fromJson(req.body(), Map.class);
 
+            TrainCapacity trainCapacity = new TrainCapacity(0, 0);
+
             if (addRequest != null && addRequest.containsKey("CF") && addRequest.containsKey("bike")) {
                 String cf = String.valueOf(addRequest.get("CF"));
                 int bike = Integer.parseInt((String) addRequest.get("bike"));
@@ -196,17 +199,25 @@ public class GatewayAPI {
                 Iterator<TrainSeats> iterator = trains.iterator();
                 if(trains.isEmpty()) {
                     TrainSeats trainTemp = new TrainSeats(trainId, date);
-                    i=trainTemp.bookingSeat();
+                    trainCapacity=trainTemp.bookingSeat(bike);
                     trains.add(trainTemp);
 
                 }
                 else {
                     while (iterator.hasNext()) {
-                        if(iterator.next().getTrainId().equals(trainId) && iterator.next().getDate().equals(date)) {
-                            i=iterator.next().bookingSeat();
+                        TrainSeats trainTemp=iterator.next();
+                        if(trainTemp.getTrainId().equals(trainId) && trainTemp.getDate().equals(date)) {
+                            trainCapacity=trainTemp.bookingSeat(bike);
+                        }
+                        else {
+                            trainTemp = new TrainSeats(trainId, date);
+                            trainCapacity=trainTemp.bookingSeat(bike);
+                            trains.add(trainTemp);
+                            break;
                         }
                     }
                 }
+                lightInit(trainCapacity);
 
 
 
@@ -297,7 +308,7 @@ public class GatewayAPI {
         }, gson::toJson);
     }
 
-    public void lightInit(int i) {
+    public static void lightInit(TrainCapacity i) {
 
         String lightsURL;
         RestTemplate rest=new RestTemplate();;
@@ -309,22 +320,37 @@ public class GatewayAPI {
 
         String getLucebri = "http://localhost:8000/lights/1";
 
-        int brightness = 25;
+        int brightness =i.getCapacity();
 
         String onLightsNew = "{ \"on\" : true,\"hue\" : 25500, \"bri\" : " + brightness + "}";
-        String offLights = "{ \"on\" : false}";
+        String fullByke = "{ \"on\" : true, \"hue\" : 65535, \"bri\" : 200}";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         // create the HTTP request
         HttpEntity<String> onRequestNew = new HttpEntity<>(onLightsNew, headers);
-        HttpEntity<String> offRequest = new HttpEntity<>(offLights, headers);
+        HttpEntity<String> fullBykeReq = new HttpEntity<>(fullByke, headers);
+        switch (i.getReturnValue()) {
+            case 1:
+                changeStatus("/api/newdeveloper/lights/1", onRequestNew, lightsURL, rest);
+                break;
+                //changeStatus("/api/newdeveloper/lights/2", onRequestNew, lightsURL, rest);
+                //changeStatus("/api/newdeveloper/lights/3", onRequestNew, lightsURL, rest);
+            case 2:
+                changeStatus("/api/newdeveloper/lights/1", fullBykeReq, lightsURL, rest);
+                break;
+                //changeStatus("/api/newdeveloper/lights/2", fullBykeReq, lightsURL, rest);
+               // changeStatus("/api/newdeveloper/lights/3", fullBykeReq, lightsURL, rest);
 
-        //changeStatus("/api/newdeveloper/lights/1", onRequestNew);
-        //changeStatus("/api/newdeveloper/lights/2", onRequestNew);
-        //changeStatus("/api/newdeveloper/lights/3", onRequestNew);
+            default:
+                break;
+        }
+
+
+
+
     }
-    private void changeStatus(String lightId, HttpEntity request, String lightsURL, RestTemplate rest) {
+    private static void changeStatus(String lightId, HttpEntity request, String lightsURL, RestTemplate rest) {
         String callURL = lightsURL + lightId + "/state";
         rest.put(callURL, request);
     }
