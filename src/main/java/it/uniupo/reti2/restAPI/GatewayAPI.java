@@ -2,6 +2,7 @@ package it.uniupo.reti2.restAPI;
 
 import com.google.gson.Gson;
 import it.uniupo.reti2.*;
+import it.uniupo.reti2.MQTT.publisher.MQTTPublisher;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -219,6 +220,7 @@ public class GatewayAPI {
                     }
                 }
                 lightInit(trainCapacity);
+                MQTTPublisher.start(trainCapacity);
 
 
 

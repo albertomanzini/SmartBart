@@ -1,5 +1,6 @@
 package it.uniupo.reti2.MQTT.publisher;
 
+import it.uniupo.reti2.TrainCapacity;
 import it.uniupo.reti2.TrainSeats;
 import it.uniupo.reti2.restAPI.GatewayAPI;
 import org.eclipse.paho.client.mqttv3.*;
@@ -47,7 +48,9 @@ public class MQTTPublisher {
      * The method to start the publisher. Currently, it sets a Last Will and Testament
      * message, open a non persistent connection, and publish a temperature value
      */
-    public static void start() {
+    public static void start(TrainCapacity trainCapacity) {
+        MQTTPublisher publisher = new MQTTPublisher();
+
         try {
             MqttConnectOptions options = new MqttConnectOptions();
             // persistent, durable connection
@@ -58,7 +61,7 @@ public class MQTTPublisher {
             client.connect(options);
 
             // publish something...
-            publishBike();
+            publishBike(trainCapacity);
 
         } catch (MqttException e) {
             e.printStackTrace();
@@ -69,7 +72,7 @@ public class MQTTPublisher {
      * It prepares and publish the temperature value to a specific topic (/homestation/temperature).
      * @throws MqttException
      */
-    public static void publishBike() throws MqttException {
+    public static void publishBike(TrainCapacity trainCapacity) throws MqttException {
         // get the topic
         MqttTopic temperatureTopic = client.getTopic(TOPIC_TEMPERATURE);
         // message content
@@ -78,13 +81,19 @@ public class MQTTPublisher {
         // publish the message on the given topic
         // by default, the QoS is 1 and the message is not retained
       //  temperatureTopic.publish(new MqttMessage(temperature.getBytes()));
-        if(GatewayAPI.i <= 2) {
+        if(trainCapacity.getReturnValue()==2) {
             // debug
-            System.out.println("Published message on topic '" + temperatureTopic.getName() + "': " + GatewayAPI.i );
-        temperature="prenotato"; }
-        else{
-            System.out.println("Published message on topic '" + temperatureTopic.getName() + "': " + GatewayAPI.i );
+            System.out.println("Published message on topic '" + temperatureTopic.getName() + "': " + "posti bici finiti" );
+            temperature="posti bici finiti";
+        }
+        else if(trainCapacity.getReturnValue()==0){
+            System.out.println("Published message on topic '" + temperatureTopic.getName() + "': " + "NESSUNA prenoazione" );
             temperature="posti esauriti";
+        }
+        else {
+            System.out.println("Published message on topic '" + temperatureTopic.getName() + "': " + "Prenotato" );
+            temperature="prenotato";
+
         }
         temperatureTopic.publish(new MqttMessage(temperature.getBytes()));
     }
@@ -92,9 +101,5 @@ public class MQTTPublisher {
     /**
      * The main
      */
-    public static void main(String[] args) {
-        MQTTPublisher publisher = new MQTTPublisher();
-        publisher.start();
-    }
 
 }
