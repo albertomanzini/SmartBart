@@ -42,7 +42,7 @@ public class MQTTPublisher {
             e.printStackTrace();
         }
     }
-
+//cc
     /**
      * The method to start the publisher. Currently, it sets a Last Will and Testament
      * message, open a non persistent connection, and publish a temperature value
